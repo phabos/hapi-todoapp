@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phabos/hapi-todoapp.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,6 +17,9 @@
     "lokijs": "^1.4.1"
   },
   "devDependencies": {
-    "forever": "^0.15.2"
+    "forever": "^0.15.2",
+    "handlebars": "^4.0.5",
+    "hoek": "^4.0.1",
+    "vision": "^4.1.0"
   }
 }

@@ -2,6 +2,8 @@
 
 const Hapi = require('hapi');
 const Loki = require('lokijs');
+const Hoek = require('hoek');
+const Path = require('path');
 
 // Create a server with a host and port
 const server = new Hapi.Server();
@@ -10,12 +12,26 @@ server.connection({
     port: 8080
 });
 
+// Templating
+server.register(require('vision'), (err) => {
+    Hoek.assert(!err, err);
+    server.views({
+        engines: {
+            html: require('handlebars')
+        },
+        relativeTo: __dirname,
+        path: 'templates',
+        layout: true,
+        layoutPath: Path.join(__dirname, 'templates/layout')
+    });
+});
+
 // Add the route
 server.route({
     method: 'GET',
     path:'/insert',
     handler: function (request, reply) {
-        databaseManager.insert( { name : 'phabos', email: 'pahbos.soap@lokijs.org', age: 33 } );
+        //databaseManager.insert( { name : 'phabos', email: 'pahbos.soap@lokijs.org', age: 33 } );
         return reply('Users inserted');
     }
 });
@@ -25,8 +41,8 @@ server.route({
     path:'/get',
     handler: function (request, reply) {
         var test = databaseManager.find( {'name': 'phabos'} );
-        console.log( test );
-        return reply('hello world');
+        return reply.view('index', { name: test[0]['name'] });
+        //return reply('hello world');
     }
 });
 
