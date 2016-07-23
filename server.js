@@ -11,7 +11,7 @@ const Basic = require('hapi-auth-basic');
 // Create a server with a host and port
 const server = new Hapi.Server();
 server.connection({
-    host: 'todoappwithhapi.com',
+    host: 'localhost',
     port: 8080
 });
 
