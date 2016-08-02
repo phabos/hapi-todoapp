@@ -13,16 +13,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "hapi": "^13.5.0",
-    "lokijs": "^1.4.1"
-  },
-  "devDependencies": {
-    "bcrypt": "^0.8.7",
-    "boom": "^3.2.2",
     "forever": "^0.15.2",
     "handlebars": "^4.0.5",
-    "hapi-auth-basic": "^4.2.0",
+    "hapi": "^13.5.0",
     "hoek": "^4.0.1",
+    "inert": "^4.0.1",
+    "lokijs": "^1.4.1",
+    "uniqid": "^4.0.0",
     "vision": "^4.1.0"
   }
 }
