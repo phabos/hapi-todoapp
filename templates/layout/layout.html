@@ -7,12 +7,54 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="stylesheet" type="text/css" href="{{asset 'css/bootstrap.min.css'}}"></link>
       <link rel="stylesheet" type="text/css" href="{{asset 'css/main.css'}}"></link>
-      <script type="text/javascript" src="{{asset 'js/bootstrap.min.js'}}"></script>
+      <link rel="stylesheet" type="text/css" href="{{asset 'font-awesome/css/font-awesome.min.css'}}"></link>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
       <script type="text/javascript" src="{{asset 'js/jquery-3.1.0.min.js'}}"></script>
+      <script type="text/javascript" src="{{asset 'js/bootstrap.min.js'}}"></script>
     </head>
     <body>
-        <div>
-            {{{content}}}
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 acenter">
+            <h1 class="main-title"><i class="fa fa-headphones" aria-hidden="true"></i> Media center app</h1>
+            <div class="clear"></div>
+          </div>
         </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div>
+              <form class="aor">
+                <input class="form-control" type="text" placeholder="Search...">
+                <button type="submit" class="fm">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
+              <ul class="nav of nav-stacked">
+                <li>
+                  <a href="/" class="{{isActive '/'}}">Home</a>
+                </li>
+                <li>
+                  <a href="/artists" class="{{isActive '/artists'}}">Artistes</a>
+                </li>
+                <li class="active">
+                  <a href="/playlists" class="{{isActive '/playlists'}}">Playlist</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            {{{content}}}
+          </div>
+        </div>
+      </div>
+      <hr class="rw aky">
+      <footer>
+        <div class="row">
+          <div class="col-sm-12 aright">
+            <a href="https://twitter.com/phabos1" target="_blank">@made with love by phabos</a>
+          </div>
+        </div>
+      </footer>
+      <script type="text/javascript" src="{{asset 'js/main.js'}}"></script>
     </body>
 </html>

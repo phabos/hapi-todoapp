@@ -6,7 +6,7 @@ const Hoek = require('hoek');
 const Path = require('path');
 
 // Project packages
-const db = require('./models/databaseManager');
+const db = require('./models/databaseManager').databaseManager;
 const routes = require('./config/routes');
 
 // Create a server with a host and port
@@ -27,7 +27,7 @@ server.register(require('vision'), (err) => {
         path: 'templates',
         layout: true,
         layoutPath: Path.join(__dirname, 'templates/layout'),
-        helpersPath: Path.join(__dirname, 'templates/helpers'),
+        helpersPath: Path.join(__dirname, 'templates/helpers')
     });
 });
 
@@ -43,5 +43,5 @@ server.start((err) => {
         throw err;
     }
     console.log('Server running at:', server.info.uri);
-    db.databaseManager.init();
+    db.init();
 });

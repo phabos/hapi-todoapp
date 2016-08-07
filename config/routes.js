@@ -1,4 +1,5 @@
 const mainController = require( __dirname + '/../controllers/mainController');
+const artistsController = require( __dirname + '/../controllers/artistsController');
 
 module.exports = [
   {
@@ -14,25 +15,30 @@ module.exports = [
   },
   {
       method: 'GET',
-      path:'/insert',
+      path:'/',
       handler: function (request, reply) {
-          //db.databaseManager.insert( { name : 'phabos', email: 'pahbos.soap@lokijs.org', age: 33 } );
-          return reply('Users inserted');
+          return mainController.main.home( reply );
       }
   },
   {
       method: 'GET',
-      path:'/get',
+      path:'/artists',
       handler: function (request, reply) {
-          return mainController.main.response( reply );
+          return artistsController.artists.home( reply );
       }
   },
   {
       method: 'GET',
-      path:'/newroute',
+      path:'/artists/get',
       handler: function (request, reply) {
-          // test
-          return reply('Yo TEST');
+          return artistsController.artists.get( reply );
       }
-  }
+  },
+  {
+      method: 'POST',
+      path:'/artists/insert',
+      handler: function (request, reply) {
+          return artistsController.artists.insert( request, reply );
+      }
+  },
 ]
