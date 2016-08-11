@@ -1,14 +1,11 @@
-<div class="mainartist" ng-controller="ArtistCtrl">
-  <h2>Artistes</h2>
+<div class="mainartist" ng-controller="ArtistDetailCtrl">
+  <h2>{{artist.name}}</h2>
   <div class="clear"></div>
   <div class="anv alg ala">
-    <h3 class="anw anx">Liste</h3>
+    <h3 class="anw anx">Morceaux</h3>
   </div>
   <div class="clear"></div>
   <div class="list">
-    <div ng-repeat="artist in artists">
-      <a href="artist/{* artist._id *}">{* artist.name *}</a>
-    </div>
   </div>
   <div class="clear"></div>
 
@@ -20,10 +17,10 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Ajouter un artiste</h4>
+          <h4 class="modal-title">Ajouter des morceaux</h4>
         </div>
         <div class="modal-body">
-          <input type="text" name="artistName" class="form-control" placeholder="artist name" />
+          <input type="file" multiple />
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" ng-click="saveArtist()">Save changes</button>

@@ -28,9 +28,16 @@ var artists = {
     },
     // List artists endpoint
     get: function( reply ) {
-      Artist.find({}, function(err, artistList) {
+      Artist.find({}).sort('name').exec( function(err, artistList) {
         if (err) throw err;
         return reply( artistList );
+      });
+    },
+    // Get artist DETAIL
+    artist: function( request, reply ) {
+      Artist.find({ _id: request.params.id }).exec( function(err, artistDetail) {
+        if (err) throw err;
+        return reply.view( 'artist', { artist: artistDetail[0] } );
       });
     }
 }

@@ -1,9 +1,9 @@
 const db = require( __dirname + '/../models/databaseManager');
 
-var main = {
+var playlists = {
     home: function( reply ) {
-      return reply.view('home');
+      return reply.view('home_playlists');
     }
 }
 
-module.exports.main = main;
+module.exports.playlists = playlists;

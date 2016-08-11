@@ -44,4 +44,5 @@ server.start((err) => {
     }
     console.log('Server running at:', server.info.uri);
     db.init();
+    console.log('db loaded');
 });
