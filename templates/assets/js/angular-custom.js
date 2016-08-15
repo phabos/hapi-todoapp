@@ -32,6 +32,65 @@ mediaCenterApp.controller('ArtistCtrl', function($scope, $http, getHttp, mainDom
 });
 
 mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, mainDomain) {
+  $scope.savedFiles = [];
+
+  $scope.addAlbum = function() {
+    jQuery.post( "/album/insert", {albumName: jQuery('input[name="albumName"]').val(), artistId: jQuery('.mainartist').data('id'), albumList: angular.toJson($scope.savedFiles)}, function( data ) {
+        console.log(data);
+        jQuery('input[name="albumName"]').val('');
+        $('#addAlbumModal').modal('hide');
+        getAlbumList();
+    });
+  }
+
+  $scope.parentDirList = function() {
+    getAlbumFolder();
+  }
+
+  $scope.sonDirList = function( dir ) {
+    getAlbumFolder( encodeURIComponent(dir) );
+  }
+
+  $scope.isAudioFile = function( filename ) {
+    return ['mp3', 'wav', 'flac'].indexOf( filename.split('.').pop() ) >= 0;
+  }
+
+  $scope.addToList = function( file ) {
+    $scope.savedFiles.push({ fileName: file.replace(/^.*[\\\/]/, ''), completePath: file });
+  }
+
+  $scope.clearList = function() {
+    $scope.savedFiles = [];
+  }
+
+  $scope.playFile = function( audioFileName ) {
+    getHttp.httpRequest(mainDomain.name + '/player/' + encodeURIComponent(audioFileName) ).success(function(data, status, headers, config) {
+      console.log(data);
+    });
+  }
+
+  getAlbumList = function() {
+    console.log('artist list called ' + jQuery('.mainartist').data('id') );
+    getHttp.httpRequest(mainDomain.name + '/artist/albums/' + jQuery('.mainartist').data('id')).success(function(data, status, headers, config) {
+      if( data.length > 0 ) {
+        for (var i = 0; i < data.length; i++) {
+          data[i].list = angular.fromJson(data[i].list);
+        }
+      }
+      $scope.albums = data;
+    });
+  }
+
+  getAlbumFolder = function( dir = '' ) {
+    console.log('folder list called ' + dir);
+    getHttp.httpRequest(mainDomain.name + '/filesystem/' + ( dir ? dir : 'empty' )).success(function(data, status, headers, config) {
+      console.log(data);
+      $scope.files = data;
+    });
+  }
+
+  getAlbumList();
+  getAlbumFolder();
 });
 
 mediaCenterApp.factory('getHttp', function($http) {

@@ -1,9 +1,6 @@
 const uniqid = require('uniqid');
-const Joi = require('joi');
 const Artist = require( __dirname + '/../models/artist');
-const schema = {
-    artistName: Joi.string().alphanum().min(3).max(30).required()
-};
+const ArtistAlbum = require( __dirname + '/../models/artistAlbum');
 
 var artists = {
     // Homepage
@@ -13,17 +10,10 @@ var artists = {
     },
     // Insert artist endpoint
     insert: function( request, reply ) {
-      // Validation
-      Joi.validate({ artistName: request.payload.artistName }, schema, function (err, value) {
-        if(err === null) {
-          var artist = new Artist({ name: request.payload.artistName, uniqid: uniqid() });
-          artist.save(function(err) {
-            if (err) throw err;
-            return reply({ error: 0, msg: 'user inserted' }).code( 200 );
-          });
-        }else{
-          return reply({ error: 1, msg: 'Erreur de validation' }).code( 200 );
-        }
+      var artist = new Artist({ name: request.payload.artistName, uniqid: uniqid() });
+      artist.save(function(err) {
+        if (err) throw err;
+        return reply({ error: 0, msg: 'artist inserted' }).code( 200 );
       });
     },
     // List artists endpoint
@@ -35,11 +25,27 @@ var artists = {
     },
     // Get artist DETAIL
     artist: function( request, reply ) {
-      Artist.find({ _id: request.params.id }).exec( function(err, artistDetail) {
+      Artist.findOne({ _id: request.params.id }).exec( function(err, artistDetail) {
         if (err) throw err;
-        return reply.view( 'artist', { artist: artistDetail[0] } );
+        return reply.view( 'artist', { artist: artistDetail } );
       });
-    }
+    },
+    //Get Album details
+    albums: function( request, reply ) {
+      ArtistAlbum.find({ artistId: request.params.id }).exec( function(err, albumDetail) {
+        if (err) throw err;
+        return reply( albumDetail );
+      });
+    },
+    // Insert artist endpoint
+    albumInsert: function( request, reply ) {
+      // Validation
+      var album = new ArtistAlbum({ name: request.payload.albumName, artistId: request.payload.artistId, list: request.payload.albumList});
+      album.save(function(err) {
+        if (err) throw err;
+        return reply({ error: 0, msg: 'album inserted' }).code( 200 );
+      });
+    },
 }
 
 module.exports.artists = artists;

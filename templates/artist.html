@@ -1,29 +1,44 @@
-<div class="mainartist" ng-controller="ArtistDetailCtrl">
+<div class="mainartist" ng-controller="ArtistDetailCtrl" data-id="{{artist._id}}">
   <h2>{{artist.name}}</h2>
-  <div class="clear"></div>
-  <div class="anv alg ala">
-    <h3 class="anw anx">Morceaux</h3>
+  <div class="clear"></div><br/>
+  <div ng-repeat="album in albums">
+    <div class="anv alg ala">
+      <h3 class="anw anx">{* album.name *}</h3>
+    </div>
+    <div class="clear"></div><br/>
+    <ul>
+      <li ng-repeat="track in album.list track by $index"><a href="#" ng-click="playFile( track.completePath )">{* track.fileName *}</li>
+    </ul>
   </div>
   <div class="clear"></div>
   <div class="list">
   </div>
   <div class="clear"></div>
 
-  <a href="#" class="add-btn" data-toggle="modal" data-target="#addArtistsModal"><i class="fa fa-plus" aria-hidden="true"></i></a>
+  <a href="#" class="add-btn" data-toggle="modal" data-target="#addAlbumModal"><i class="fa fa-plus" aria-hidden="true"></i></a>
 
   <!-- Modal -->
-  <div class="modal fade" id="addArtistsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="addAlbumModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Ajouter des morceaux</h4>
+          <h4 class="modal-title">Ajouter un album</h4>
         </div>
         <div class="modal-body">
-          <input type="file" multiple />
+            <input type="text" name="albumName" class="form-control" placeholder="album name" /><br/>
+            <div ng-repeat="file in savedFiles">
+              {* file.fileName *}<br/>
+            </div>
+            <hr/>
+            <a ng-click="parentDirList()" href="#">Parent ..</a>
+            <div ng-repeat="file in files.files">
+              <a ng-click="isAudioFile( file ) ? addToList( files.current + '/' + file ) : sonDirList( files.current + '/' + file )" href="#">{* file *}</a>
+            </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" ng-click="saveArtist()">Save changes</button>
+          <button type="button" class="btn btn-primary" ng-click="clearList()">Clear List</button>
+          <button type="button" class="btn btn-primary" ng-click="addAlbum()">Ajouter</button>
         </div>
       </div>
     </div>

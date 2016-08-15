@@ -3,18 +3,23 @@ var Mongoose = require('mongoose');
 var Schema = Mongoose.Schema;
 
 // create a schema
-var artistSchema = new Schema({
+var ArtistAlbumSchema = new Schema({
   name: {
     type: String,
     required: true,
     min: 1,
     min: 60
   },
-  uniqid: {
+  artistId: {
     type: Schema.Types.Mixed,
+    required: true
+  },
+  list: {
+    type: Object,
+    required: true
   }
 });
 
-var Artist = Mongoose.model('Artist', artistSchema);
+var ArtistAlbum = Mongoose.model('ArtistAlbum', ArtistAlbumSchema);
 
-module.exports = Artist;
+module.exports = ArtistAlbum;

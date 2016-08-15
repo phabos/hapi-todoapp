@@ -1,6 +1,8 @@
 const mainController = require( __dirname + '/../controllers/mainController').main;
 const artistsController = require( __dirname + '/../controllers/artistsController').artists;
 const playlistsController = require( __dirname + '/../controllers/playlistsController').playlists;
+const filesystemController = require( __dirname + '/../controllers/filesystemController').filesystem;
+const playerController = require( __dirname + '/../controllers/playerController').player;
 
 module.exports = [
   {
@@ -29,17 +31,24 @@ module.exports = [
       }
   },
   {
-      method: 'GET',
-      path:'/artists/get',
-      handler: function (request, reply) {
-          return artistsController.get( reply );
-      }
-  },
-  {
       method: 'POST',
       path:'/artists/insert',
       handler: function (request, reply) {
           return artistsController.insert( request, reply );
+      }
+  },
+  {
+      method: 'POST',
+      path:'/album/insert',
+      handler: function (request, reply) {
+          return artistsController.albumInsert( request, reply );
+      }
+  },
+  {
+      method: 'GET',
+      path:'/artists/get',
+      handler: function (request, reply) {
+          return artistsController.get( reply );
       }
   },
   {
@@ -54,6 +63,27 @@ module.exports = [
       path:'/playlists',
       handler: function (request, reply) {
           return playlistsController.home( reply );
+      }
+  },
+  {
+      method: 'GET',
+      path:'/artist/albums/{id}',
+      handler: function (request, reply) {
+          return artistsController.albums( request, reply );
+      }
+  },
+  {
+      method: 'GET',
+      path:'/filesystem/{command}',
+      handler: function (request, reply) {
+          return filesystemController.home( request, reply );
+      }
+  },
+  {
+      method: 'GET',
+      path:'/player/{audioFileName}',
+      handler: function (request, reply) {
+          return playerController.home( request, reply );
       }
   },
 ]
