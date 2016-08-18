@@ -1,9 +1,9 @@
 <div class="mainartist" ng-controller="ArtistDetailCtrl" data-id="{{artist._id}}">
   <h2>{{artist.name}}</h2>
   <div class="clear"></div><br/>
-  <div ng-repeat="album in albums">
+  <div ng-repeat="(key, album) in albums">
     <div class="anv alg ala">
-      <h3 class="anw anx">{* album.name *}</h3>
+      <h3 class="anw anx"><a href="#" ng-click="playAlbum( key )">{* album.name *}</a></h3>
     </div>
     <div class="clear"></div><br/>
     <ul>

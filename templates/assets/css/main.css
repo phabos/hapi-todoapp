@@ -195,3 +195,16 @@ anv {
 .clear {
   margin-bottom: 10px;
 }
+.main h2 {
+  text-transform: uppercase;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .main {
+    margin-top: 20px;
+    border-top: 4px solid #000;
+  }
+  .main h2 {
+    margin-top:.5rem;
+  }
+}

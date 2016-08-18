@@ -69,6 +69,11 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
     });
   }
 
+  $scope.playAlbum = function( albumName ) {
+    // TO DO !!
+    console.log($scope.albums[albumName].list);
+  }
+
   getAlbumList = function() {
     console.log('artist list called ' + jQuery('.mainartist').data('id') );
     getHttp.httpRequest(mainDomain.name + '/artist/albums/' + jQuery('.mainartist').data('id')).success(function(data, status, headers, config) {

@@ -22,7 +22,7 @@ var player = {
       reply('File running');
     },
     play: function( audioFileName ) {
-      vlc = spawn(config.vlcLocation, ['--intf', 'dummy', audioFileName, '--play-and-exit']);
+      vlc = spawn(config.vlcLocation, ['--intf', 'dummy', audioFileName, '--play-and-exit', '--no-video']);
       vlc.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
       });
