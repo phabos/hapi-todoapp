@@ -1,8 +1,9 @@
-const exec = require('child_process').exec;
-const fs = require('fs');
+var exec = require('child_process').exec;
+var fs = require('fs');
+var config = require( "../config/env.json" )[process.env.NODE_ENV];
 
 var filesystem = {
-    root: '/Users/fabienprezat/Documents/Musik',
+    root: config.musikFolder,
     home: function( request, reply ) {
       if( request.params.command == "empty" ) {
         currentPath = this.root;

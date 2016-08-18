@@ -1,8 +1,8 @@
-const mainController = require( __dirname + '/../controllers/mainController').main;
-const artistsController = require( __dirname + '/../controllers/artistsController').artists;
-const playlistsController = require( __dirname + '/../controllers/playlistsController').playlists;
-const filesystemController = require( __dirname + '/../controllers/filesystemController').filesystem;
-const playerController = require( __dirname + '/../controllers/playerController').player;
+var mainController = require( __dirname + '/../controllers/mainController').main;
+var artistsController = require( __dirname + '/../controllers/artistsController').artists;
+var playlistsController = require( __dirname + '/../controllers/playlistsController').playlists;
+var filesystemController = require( __dirname + '/../controllers/filesystemController').filesystem;
+var playerController = require( __dirname + '/../controllers/playerController').player;
 
 module.exports = [
   {

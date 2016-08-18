@@ -1,5 +1,5 @@
-const Mongoose = require('mongoose');
-const Uniqid = require('uniqid');
+var Mongoose = require('mongoose');
+var Uniqid = require('uniqid');
 
 var databaseManager = {
     dbName: 'mediacenter',

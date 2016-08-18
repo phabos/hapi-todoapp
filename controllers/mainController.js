@@ -1,4 +1,4 @@
-const db = require( __dirname + '/../models/databaseManager');
+var db = require( __dirname + '/../models/databaseManager');
 
 var main = {
     home: function( reply ) {

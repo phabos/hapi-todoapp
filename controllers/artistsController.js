@@ -1,6 +1,6 @@
-const uniqid = require('uniqid');
-const Artist = require( __dirname + '/../models/artist');
-const ArtistAlbum = require( __dirname + '/../models/artistAlbum');
+var uniqid = require('uniqid');
+var Artist = require( __dirname + '/../models/artist');
+var ArtistAlbum = require( __dirname + '/../models/artistAlbum');
 
 var artists = {
     // Homepage

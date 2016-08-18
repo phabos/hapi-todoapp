@@ -2,9 +2,17 @@
 ## Install
 ````npm install````
 
-## Run forever
+## Run
 Run
-````forever -v -d -w start server.js````
+````forever -v -d -w start app.js````
+Or
+````NODE_ENV=dev node app.js````
 
 Stop
 ````forever stopall````
+
+Start mongodb
+````mongod --config /usr/local/etc/mongod.conf````
+
+Set your env config in
+````env.json````
