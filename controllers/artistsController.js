@@ -46,6 +46,16 @@ var artists = {
         return reply({ error: 0, msg: 'album inserted' }).code( 200 );
       });
     },
+    // delete
+    delete: function( request, reply ) {
+      Artist.remove({ _id: request.params.id }, function(err,removed) {
+        if (err) throw err;
+        ArtistAlbum.remove({ artistId: request.params.id }, function(err,removed) {
+          if (err) throw err;
+          return reply({ error: 0, msg: 'artist deleted' }).code( 200 );
+        });
+      });
+    },
 }
 
 module.exports.artists = artists;

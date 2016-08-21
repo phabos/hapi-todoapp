@@ -74,6 +74,13 @@ module.exports = [
   },
   {
       method: 'GET',
+      path:'/artist/delete/{id}',
+      handler: function (request, reply) {
+          return artistsController.delete( request, reply );
+      }
+  },
+  {
+      method: 'GET',
       path:'/filesystem/{command}',
       handler: function (request, reply) {
           return filesystemController.home( request, reply );

@@ -21,6 +21,13 @@ mediaCenterApp.controller('ArtistCtrl', function($scope, $http, getHttp, mainDom
       });
     }
 
+    $scope.deleteArtist = function( artistId ){
+      jQuery.get( "/artist/delete/" + artistId, function( data ) {
+          console.log(data);
+          getArtistsList();
+      });
+    }
+
     getArtistsList = function() {
       console.log('artist list called');
       getHttp.httpRequest(mainDomain.name + '/artists/get').success(function(data, status, headers, config) {
@@ -52,7 +59,7 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
   }
 
   $scope.isAudioFile = function( filename ) {
-    return ['mp3', 'wav', 'flac'].indexOf( filename.split('.').pop() ) >= 0;
+    return ['mp3', 'wav', 'flac', 'mp4'].indexOf( filename.split('.').pop() ) >= 0;
   }
 
   $scope.addToList = function( file ) {

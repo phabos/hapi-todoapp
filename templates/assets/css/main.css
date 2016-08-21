@@ -199,6 +199,19 @@ anv {
   text-transform: uppercase;
   text-align: center;
 }
+.fleft {
+  float: right;
+  margin-top:5px;
+}
+.list ul {
+  padding-left: 0;
+}
+.artist-list {
+  margin: 5px 0;
+  padding: 0 0 5px 0;
+  border-bottom: 1px solid #000;
+  list-style: none;
+}
 @media (max-width: 768px) {
   .main {
     margin-top: 20px;

@@ -6,9 +6,11 @@
   </div>
   <div class="clear"></div>
   <div class="list">
-    <div ng-repeat="artist in artists">
-      <a href="artist/{* artist._id *}">{* artist.name *}</a>
-    </div>
+    <ul>
+    <li ng-repeat="artist in artists" class="artist-list">
+      <a href="artist/{* artist._id *}">{* artist.name *}</a><a href="#" class="fleft" ng-click="deleteArtist( artist._id )"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+    </li>
+  </ul>
   </div>
   <div class="clear"></div>
 
