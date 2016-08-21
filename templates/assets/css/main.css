@@ -206,11 +206,19 @@ anv {
 .list ul {
   padding-left: 0;
 }
-.artist-list {
+.list ul li {
   margin: 5px 0;
   padding: 0 0 5px 0;
   border-bottom: 1px solid #000;
   list-style: none;
+}
+.btn-primary {
+  background-color: #1ca8dd;
+  font-weight: lighter;
+  color: #fff;
+}
+.text-right {
+  text-align: right;
 }
 @media (max-width: 768px) {
   .main {

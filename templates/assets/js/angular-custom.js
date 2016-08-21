@@ -38,7 +38,16 @@ mediaCenterApp.controller('ArtistCtrl', function($scope, $http, getHttp, mainDom
     getArtistsList();
 });
 
-mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, mainDomain) {
+mediaCenterApp.controller('YoutubeCtrl', function($scope, $http, getHttp, mainDomain) {
+  $scope.play = function() {
+    getHttp.httpRequest(mainDomain.name + '/player/' + encodeURIComponent( jQuery('input[name="youtubeurl"]').val() ) ).success(function(data, status, headers, config) {
+      console.log(data);
+    });
+  }
+});
+
+mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, mainDomain, socketIoAngular) {
+  currentFilePlaying = 0;
   $scope.savedFiles = [];
 
   $scope.addAlbum = function() {
@@ -71,14 +80,32 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
   }
 
   $scope.playFile = function( audioFileName ) {
-    getHttp.httpRequest(mainDomain.name + '/player/' + encodeURIComponent(audioFileName) ).success(function(data, status, headers, config) {
-      console.log(data);
-    });
+    playFile( audioFileName );
   }
 
   $scope.playAlbum = function( albumName ) {
-    // TO DO !!
+    currentFilePlaying = 0;
+    if( $scope.albums[albumName].list.length > 0 ) {
+      playFile( $scope.albums[albumName].list[0].completePath );
+      // Check socket io message
+      socketIoAngular.on('message', function(socket, args) {
+        console.log(socket);
+        if(socket == 'stop') {
+          currentFilePlaying = currentFilePlaying++;
+          console.log(currentFilePlaying);
+          if( $scope.albums[albumName].list[currentFilePlaying].completePath ) {
+            playFile( $scope.albums[albumName].list[currentFilePlaying].completePath );
+          }
+        }
+      });
+    }
     console.log($scope.albums[albumName].list);
+  }
+
+  playFile = function( audioFileName ) {
+    getHttp.httpRequest(mainDomain.name + '/player/' + encodeURIComponent(audioFileName) ).success(function(data, status, headers, config) {
+      console.log(data);
+    });
   }
 
   getAlbumList = function() {
@@ -125,4 +152,17 @@ mediaCenterApp.factory('mainDomain', function($location) {
     return {
         name: $location.protocol() + "://" + $location.host() + ':' + $location.port()
     };
+});
+
+mediaCenterApp.factory('socketIoAngular', function($rootScope){
+  var socket = io.connect('http://localhost:9090');
+  this.on = function(eventName, callback) {
+    socket.on(eventName, function () {
+      var args = arguments;
+      $rootScope.$apply(function () {
+        callback.apply(socket, args);
+      });
+    });
+  }
+  return this;
 });

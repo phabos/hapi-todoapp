@@ -35,7 +35,7 @@ var player = {
         console.log(`child process exited with code ${code}`);
         require('../config/server').server.sendMessage('stop');
       });
-    }
+    },
 }
 
 module.exports.player = player;

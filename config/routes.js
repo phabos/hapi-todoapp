@@ -1,6 +1,7 @@
 var mainController = require( __dirname + '/../controllers/mainController').main;
 var artistsController = require( __dirname + '/../controllers/artistsController').artists;
 var playlistsController = require( __dirname + '/../controllers/playlistsController').playlists;
+var youtubeController = require( __dirname + '/../controllers/youtubeController').youtube;
 var filesystemController = require( __dirname + '/../controllers/filesystemController').filesystem;
 var playerController = require( __dirname + '/../controllers/playerController').player;
 
@@ -91,6 +92,13 @@ module.exports = [
       path:'/player/{audioFileName}',
       handler: function (request, reply) {
           return playerController.home( request, reply );
+      }
+  },
+  {
+      method: 'GET',
+      path:'/youtube',
+      handler: function (request, reply) {
+          return youtubeController.home( request, reply );
       }
   },
 ]

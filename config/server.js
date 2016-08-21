@@ -15,7 +15,7 @@ var server = {
         var server = new hapi.Server();
         server.connection({
             host: 'localhost',
-            port: 8080
+            port: 9090
         });
 
         // Templating

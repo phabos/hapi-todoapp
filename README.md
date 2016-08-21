@@ -16,3 +16,6 @@ Start mongodb
 
 Set your env config in
 ````env.json````
+
+Launch vlc api
+````/Applications/VLC.app/Contents/MacOS/VLC -I http --http-password phabos````

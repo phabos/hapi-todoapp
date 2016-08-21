@@ -6,9 +6,11 @@
       <h3 class="anw anx"><a href="#" ng-click="playAlbum( key )">{* album.name *}</a></h3>
     </div>
     <div class="clear"></div><br/>
-    <ul>
-      <li ng-repeat="track in album.list track by $index"><a href="#" ng-click="playFile( track.completePath )">{* track.fileName *}</li>
-    </ul>
+    <div class="list">
+      <ul>
+        <li ng-repeat="track in album.list track by $index"><a href="#" ng-click="playFile( track.completePath )">{* track.fileName *}</li>
+      </ul>
+    </div>
   </div>
   <div class="clear"></div>
   <div class="list">
