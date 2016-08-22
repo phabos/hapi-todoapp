@@ -1,5 +1,5 @@
 /******** INIT APP / SET DEPENDENCIES ********/
-var mediaCenterApp = angular.module('mediaCenter', ['angular-loading-bar']);
+var mediaCenterApp = angular.module('mediaCenter', ['angular-loading-bar', 'LocalStorageModule']);
 /******** CONFIG ********/
 // Symbols
 mediaCenterApp.config(function($interpolateProvider) {
@@ -46,7 +46,17 @@ mediaCenterApp.controller('YoutubeCtrl', function($scope, $http, getHttp, mainDo
   }
 });
 
-mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, mainDomain, socketIoAngular, getVlc) {
+mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, playlistLocal) {
+  $scope.player = playlistLocal.get();
+  $scope.$on('test', function(evt, message){
+    console.log(message); // and you can put your $get method here
+  });
+  socketIoAngular.on('message', function(socket, args) {
+    console.log( 'From player ctrl ' + socket );
+  });
+});
+
+mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, mainDomain, socketIoAngular, playlistLocal) {
   currentFilePlaying = 0;
   $scope.savedFiles = [];
 
@@ -80,6 +90,7 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
   }
 
   $scope.playFile = function( audioFileName ) {
+    playlistLocal.set( audioFileName );
     playFile( audioFileName );
   }
 
@@ -148,16 +159,13 @@ mediaCenterApp.factory('getHttp', function($http) {
     return this;
 });
 
-mediaCenterApp.factory('getVlc', function($http){
-  this.httpRequest = function( file ) {
-    $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode('' + ':' + 'phabos');
-    $http({method: 'GET', url: 'http://127.0.0.1:8080/requests/' + file + '.json'}).
-    success(function(data, status, headers, config) {
-      console.log('success');
-    }).
-    error(function(data, status, headers, config) {
-      alert(data);
-    });
+mediaCenterApp.factory('playlistLocal', function(localStorageService, $rootScope){
+  this.set = function(list) {
+    localStorageService.set('playlist', list);
+    $rootScope.$broadcast('test', 'Hello');
+  }
+  this.get = function() {
+    localStorageService.get('playlist');
   }
   return this;
 });
