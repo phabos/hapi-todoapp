@@ -46,7 +46,7 @@ mediaCenterApp.controller('YoutubeCtrl', function($scope, $http, getHttp, mainDo
   }
 });
 
-mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, mainDomain, socketIoAngular) {
+mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, mainDomain, socketIoAngular, getVlc) {
   currentFilePlaying = 0;
   $scope.savedFiles = [];
 
@@ -91,9 +91,9 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
       socketIoAngular.on('message', function(socket, args) {
         console.log(socket);
         if(socket == 'stop') {
-          currentFilePlaying = currentFilePlaying++;
+          currentFilePlaying++;
           console.log(currentFilePlaying);
-          if( $scope.albums[albumName].list[currentFilePlaying].completePath ) {
+          if( typeof $scope.albums[albumName].list[currentFilePlaying] != 'undefined' ) {
             playFile( $scope.albums[albumName].list[currentFilePlaying].completePath );
           }
         }
@@ -146,6 +146,20 @@ mediaCenterApp.factory('getHttp', function($http) {
         });
     };
     return this;
+});
+
+mediaCenterApp.factory('getVlc', function($http){
+  this.httpRequest = function( file ) {
+    $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode('' + ':' + 'phabos');
+    $http({method: 'GET', url: 'http://127.0.0.1:8080/requests/' + file + '.json'}).
+    success(function(data, status, headers, config) {
+      console.log('success');
+    }).
+    error(function(data, status, headers, config) {
+      alert(data);
+    });
+  }
+  return this;
 });
 
 mediaCenterApp.factory('mainDomain', function($location) {
