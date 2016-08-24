@@ -1,4 +1,7 @@
-# App to do test
+# Media center app
+
+Aim of the project : build a media center on the top of nodejs for raspberry pi.
+
 ## Install
 ````npm install````
 
@@ -17,5 +20,5 @@ Start mongodb
 Set your env config in
 ````env.json````
 
-Launch vlc api
+Launch vlc api (unused for now)
 ````/Applications/VLC.app/Contents/MacOS/VLC -I http --http-password phabos````

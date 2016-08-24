@@ -71,19 +71,20 @@ a:hover {
 }
 .add-btn {
   position: fixed;
-    bottom: 50px;
-    right: 50px;
-    padding: 15px;
-    border-radius: 100px;
-    background-color: #1ca8dd;
-    color: #252830;
-    width: 50px;
-    height: 50px;
-    -moz-box-shadow: 2px 2px 10px 0px #000000;
--webkit-box-shadow: 2px 2px 10px 0px #000000;
--o-box-shadow: 2px 2px 10px 0px #000000;
-box-shadow: 2px 2px 10px 0px #000000;
-filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=134, Strength=10);
+  bottom: 50px;
+  right: 50px;
+  padding: 15px;
+  border-radius: 100px;
+  background-color: #1ca8dd;
+  color: #252830;
+  width: 50px;
+  height: 50px;
+  -moz-box-shadow: 2px 2px 10px 0px #000000;
+  -webkit-box-shadow: 2px 2px 10px 0px #000000;
+  -o-box-shadow: 2px 2px 10px 0px #000000;
+  box-shadow: 2px 2px 10px 0px #000000;
+  filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=134, Strength=10);
+  z-index: 10000;
 }
 .add-btn i {
   position: absolute;

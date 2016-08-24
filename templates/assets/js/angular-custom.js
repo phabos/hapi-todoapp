@@ -46,14 +46,37 @@ mediaCenterApp.controller('YoutubeCtrl', function($scope, $http, getHttp, mainDo
   }
 });
 
-mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, playlistLocal) {
+mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, playlistLocal, getHttp, mainDomain) {
   $scope.player = playlistLocal.get();
-  $scope.$on('test', function(evt, message){
-    console.log(message); // and you can put your $get method here
+
+  $scope.$on('audioplayer', function(evt, message){
+    if( message == 'updated' )
+      $scope.player = playlistLocal.get();
   });
+
   socketIoAngular.on('message', function(socket, args) {
     console.log( 'From player ctrl ' + socket );
+    if( socket == 'stop' ) {
+      playlistLocal.firstOut();
+      playFileList();
+    }
   });
+
+  $scope.play = function() {
+    playFileList();
+  }
+
+  playFileList = function() {
+    audio = playlistLocal.getFirst();
+    if( audio )
+      getHttp.httpRequest(mainDomain.name + '/player/' + encodeURIComponent(audio.completePath) ).success(function(data, status, headers, config) {});
+    else
+      console.log('Nothing to play !');
+  }
+
+  stopFileList = function() {
+    getHttp.httpRequest(mainDomain.name + '/player/stop' ).success(function(data, status, headers, config) {});
+  }
 });
 
 mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, mainDomain, socketIoAngular, playlistLocal) {
@@ -91,10 +114,9 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
 
   $scope.playFile = function( audioFileName ) {
     playlistLocal.set( audioFileName );
-    playFile( audioFileName );
   }
 
-  $scope.playAlbum = function( albumName ) {
+  /*$scope.playAlbum = function( albumName ) {
     currentFilePlaying = 0;
     if( $scope.albums[albumName].list.length > 0 ) {
       playFile( $scope.albums[albumName].list[0].completePath );
@@ -111,13 +133,7 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
       });
     }
     console.log($scope.albums[albumName].list);
-  }
-
-  playFile = function( audioFileName ) {
-    getHttp.httpRequest(mainDomain.name + '/player/' + encodeURIComponent(audioFileName) ).success(function(data, status, headers, config) {
-      console.log(data);
-    });
-  }
+  }*/
 
   getAlbumList = function() {
     console.log('artist list called ' + jQuery('.mainartist').data('id') );
@@ -161,12 +177,30 @@ mediaCenterApp.factory('getHttp', function($http) {
 
 mediaCenterApp.factory('playlistLocal', function(localStorageService, $rootScope){
   this.set = function(list) {
-    localStorageService.set('playlist', list);
-    $rootScope.$broadcast('test', 'Hello');
-  }
+    playlist = this.get('playlist');
+    playlist.push(list);
+    localStorageService.set('playlist', JSON.stringify(playlist));
+    $rootScope.$broadcast('audioplayer', 'updated');
+  };
   this.get = function() {
-    localStorageService.get('playlist');
-  }
+    playlist = localStorageService.get('playlist');
+    if( ! playlist )
+      return [];
+    else
+      return JSON.parse(playlist);
+  };
+  this.getFirst = function() {
+    playlist = this.get('playlist');
+    if( playlist[0] )
+      return playlist[0];
+    return null;
+  };
+  this.firstOut = function() {
+    playlist = this.get('playlist');
+    playlist.shift();
+    localStorageService.set('playlist', JSON.stringify(playlist));
+    $rootScope.$broadcast('audioplayer', 'updated');
+  };
   return this;
 });
 
@@ -185,6 +219,6 @@ mediaCenterApp.factory('socketIoAngular', function($rootScope){
         callback.apply(socket, args);
       });
     });
-  }
+  };
   return this;
 });

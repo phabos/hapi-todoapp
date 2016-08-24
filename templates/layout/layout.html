@@ -54,7 +54,14 @@
         </div>
       </div>
       <div class="player" ng-controller="PlayerCtrl">
-        {* player *}
+        <ul>
+          <li ng-repeat="file in player">
+            {* file.fileName *}
+          </li>
+        </ul>
+        <div>
+          <i class="fa fa-play-circle" aria-hidden="true" ng-click="play();"></i>
+        </div>
       </div>
       <hr class="rw aky">
       <footer>
