@@ -221,6 +221,37 @@ anv {
 .text-right {
   text-align: right;
 }
+.player {
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+  /*width: 100%;*/
+}
+.player .ui {
+  text-align: center;
+}
+.player .ui a {
+  font-size: 20px;
+  color: #1CA8DD;
+  padding: 15px;
+  border-radius: 100px;
+  background-color: #1ca8dd;
+  color: #252830;
+  width: 50px;
+  height: 50px;
+  -moz-box-shadow: 2px 2px 10px 0px #000000;
+  -webkit-box-shadow: 2px 2px 10px 0px #000000;
+  -o-box-shadow: 2px 2px 10px 0px #000000;
+  box-shadow: 2px 2px 10px 0px #000000;
+  filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=134, Strength=10);
+  z-index: 10000;
+  position:relative;
+}
+.player .ui i {
+  position: absolute;
+  top:1px;
+  left:1px;
+}
 @media (max-width: 768px) {
   .main {
     margin-top: 20px;
