@@ -48,6 +48,7 @@ mediaCenterApp.controller('YoutubeCtrl', function($scope, $http, getHttp, mainDo
 
 mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, playlistLocal, getHttp, mainDomain) {
   $scope.player = playlistLocal.get();
+  stopall = 0;
 
   $scope.$on('audioplayer', function(evt, message){
     if( message == 'updated' )
@@ -56,14 +57,25 @@ mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, playli
 
   socketIoAngular.on('message', function(socket, args) {
     console.log( 'From player ctrl ' + socket );
-    if( socket == 'stop' ) {
+    if( socket == 'stop' && ! stopall ) {
       playlistLocal.firstOut();
       playFileList();
     }
   });
 
   $scope.play = function() {
+    stopall = 0;
     playFileList();
+  }
+
+  $scope.stop = function() {
+    stopall = 1;
+    stopFileList();
+  }
+
+  $scope.next = function() {
+    stopall = 0;
+    stopFileList();
   }
 
   playFileList = function() {

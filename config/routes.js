@@ -96,6 +96,13 @@ module.exports = [
   },
   {
       method: 'GET',
+      path:'/player/stop',
+      handler: function (request, reply) {
+          return playerController.stop( request, reply );
+      }
+  },
+  {
+      method: 'GET',
       path:'/youtube',
       handler: function (request, reply) {
           return youtubeController.home( request, reply );

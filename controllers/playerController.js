@@ -31,10 +31,25 @@ var player = {
         console.log(`stderr: ${data}`);
       });
 
-      vlc.on('close', (code) => {
-        console.log(`child process exited with code ${code}`);
+      vlc.on('close', (code, signal) => {
+        console.log(`child process exited with code ${code} / ${signal} `);
         require('../config/server').server.sendMessage('stop');
       });
+    },
+    stop: function( request, reply ) {
+      exec('pgrep ' + config.vlcProcess, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`exec error: ${error}`);
+          return;
+        }
+        exec('kill $(pgrep ' + config.vlcProcess + ')', (error, stdout, stderr) => {
+          if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+          }
+        });
+      });
+      reply('Killing process');
     },
 }
 
