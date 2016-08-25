@@ -279,9 +279,11 @@ a:hover {
   top: 60px;
   right: 10px;
   display: block;
+  background-color: rgba(95, 158, 160, 0.5);
 }
 .player div.playlist div {
   width: 120px;
+  padding: 5px;
   margin: 0;
   padding: 0;
   border-bottom: 2px solid #252830;
