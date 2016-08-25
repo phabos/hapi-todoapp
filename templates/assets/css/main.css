@@ -1,12 +1,15 @@
 body{
   font-family: 'Open Sans', sans-serif;
   font-weight: lighter;
-  color: #cfd2da;
+  color: #252830;
   background-color: #252830;
   padding: 50px 0;
+  background: url(/assets/images/01.png) no-repeat center fixed;
+  -webkit-background-size: cover;
+  background-size: cover;
 }
 .main-title {
-  border-bottom: 3px solid #fff;
+  border-bottom: 3px solid #252830;
   margin-bottom: 40px;
   padding-bottom: 20px;
   font-weight: lighter;
@@ -65,7 +68,7 @@ a:hover {
     display: block;
     padding: 7px 15px;
     text-decoration: none;
-    color: #cfd2da;
+    color: #252830;
     border-radius: 5px;
     margin-top: 5px;
 }
@@ -100,26 +103,29 @@ a:hover {
     background-color: #434857;
     color: #cfd2da;
 }
-anv {
+.anv {
     position: relative;
     font-size: 12px;
     line-height: 20px;
     text-align: center;
     text-transform: uppercase;
 }
-.anv:before {
-    position: absolute;
-    top: 50%;
-    display: block;
-    content: "";
-    width: 100%;
-    height: 1px;
-    background-color: #434857;
-}
 .anx {
     margin-top: 0;
     margin-bottom: 0;
     color: inherit;
+}
+.anv::after {
+    margin: 0 -55% 0 5%;
+}
+.anv::after, .anv::before {
+  content: "";
+  vertical-align: top;
+  display: inline-block;
+  width: 10%;
+  height: 16px;
+  border-bottom: 1px solid #252830;
+  margin: 0 -3% 0 -3%;
 }
 .anw {
     position: relative;
@@ -129,7 +135,7 @@ anv {
     padding-right: 1em;
     color: #fff;
     vertical-align: middle;
-    background-color: #252830;
+    background-color: transparent;
 }
 .anv {
     position: relative;
@@ -223,34 +229,55 @@ anv {
 }
 .player {
   position: fixed;
-  bottom: 50px;
-  left: 50px;
-  /*width: 100%;*/
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  background-color: transparent;
+  z-index: 10000;
 }
-.player .ui {
-  text-align: center;
+.player a:nth-child(2) {
+  top: 10px;
+  right: 10px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
 }
-.player .ui a {
-  font-size: 20px;
-  color: #1CA8DD;
-  padding: 15px;
-  border-radius: 100px;
-  background-color: #1ca8dd;
-  color: #252830;
+.player a:nth-child(3) {
+  top: 6px;
+  right: 46px;
+  z-index: 1000;
   width: 50px;
   height: 50px;
+}
+.player a:nth-child(4) {
+  top: 10px;
+  right: 90px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+}
+.player a {
+  position: absolute;
+  border-radius: 50px;
+  color: #252830;
+  background-color: #1ca8dd;
   -moz-box-shadow: 2px 2px 10px 0px #000000;
   -webkit-box-shadow: 2px 2px 10px 0px #000000;
   -o-box-shadow: 2px 2px 10px 0px #000000;
   box-shadow: 2px 2px 10px 0px #000000;
   filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=134, Strength=10);
   z-index: 10000;
-  position:relative;
 }
-.player .ui i {
+.player a:nth-child(2) i,
+.player a:nth-child(4) i {
   position: absolute;
-  top:1px;
-  left:1px;
+  top: 13px;
+  left: 14px;
+}
+.player a:nth-child(3) i {
+  position: absolute;
+  top: 17px;
+  left: 19px;
 }
 @media (max-width: 768px) {
   .main {
