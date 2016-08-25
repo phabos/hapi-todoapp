@@ -128,8 +128,8 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
     playlistLocal.set( audioFileName );
   }
 
-  /*$scope.playAlbum = function( albumName ) {
-    currentFilePlaying = 0;
+  $scope.playAlbum = function( albumName ) {
+    /*currentFilePlaying = 0;
     if( $scope.albums[albumName].list.length > 0 ) {
       playFile( $scope.albums[albumName].list[0].completePath );
       // Check socket io message
@@ -144,8 +144,8 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
         }
       });
     }
-    console.log($scope.albums[albumName].list);
-  }*/
+    console.log($scope.albums[albumName].list);*/
+  }
 
   getAlbumList = function() {
     console.log('artist list called ' + jQuery('.mainartist').data('id') );

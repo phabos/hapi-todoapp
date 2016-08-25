@@ -235,21 +235,21 @@ a:hover {
   background-color: transparent;
   z-index: 10000;
 }
-.player a:nth-child(2) {
+.player a:nth-child(1) {
   top: 10px;
   right: 10px;
   z-index: 999;
   width: 40px;
   height: 40px;
 }
-.player a:nth-child(3) {
+.player a:nth-child(2) {
   top: 6px;
   right: 46px;
   z-index: 1000;
   width: 50px;
   height: 50px;
 }
-.player a:nth-child(4) {
+.player a:nth-child(3) {
   top: 10px;
   right: 90px;
   z-index: 999;
@@ -268,13 +268,29 @@ a:hover {
   filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=134, Strength=10);
   z-index: 10000;
 }
-.player a:nth-child(2) i,
-.player a:nth-child(4) i {
+.player a:nth-child(1) i,
+.player a:nth-child(3) i {
   position: absolute;
   top: 13px;
   left: 14px;
 }
-.player a:nth-child(3) i {
+.player div.playlist {
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  display: block;
+}
+.player div.playlist div {
+  width: 120px;
+  margin: 0;
+  padding: 0;
+  border-bottom: 2px solid #252830;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.player a:nth-child(2) i {
   position: absolute;
   top: 17px;
   left: 19px;
