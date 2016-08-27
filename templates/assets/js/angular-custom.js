@@ -1,5 +1,5 @@
 /******** INIT APP / SET DEPENDENCIES ********/
-var mediaCenterApp = angular.module('mediaCenter', ['angular-loading-bar', 'LocalStorageModule']);
+var mediaCenterApp = angular.module('mediaCenter', ['angular-loading-bar', 'LocalStorageModule', 'ngTouch']);
 /******** CONFIG ********/
 // Symbols
 mediaCenterApp.config(function($interpolateProvider) {
