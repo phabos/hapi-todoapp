@@ -2,3 +2,5 @@ node_modules/*
 mediacenter
 npm-debug.log
 shipitfile.js
+upload
+upload/*
