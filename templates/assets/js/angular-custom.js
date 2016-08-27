@@ -46,13 +46,13 @@ mediaCenterApp.controller('YoutubeCtrl', function($scope, $http, getHttp, mainDo
   }
 });
 
-mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, playlistLocal, getHttp, mainDomain) {
-  $scope.player = playlistLocal.get();
+mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, playlistLocal, getHttp, mainDomain, animatePlaylist) {
+  $scope.player = playlistLocal.getCurrent();
   stopall = 0;
 
   $scope.$on('audioplayer', function(evt, message){
     if( message == 'updated' )
-      $scope.player = playlistLocal.get();
+      $scope.player = playlistLocal.getCurrent();
   });
 
   socketIoAngular.on('message', function(socket, args) {
@@ -62,6 +62,20 @@ mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, playli
       playFileList();
     }
   });
+
+  $scope.list = function() {
+    completeList = playlistLocal.get();
+    if( completeList ) {
+      var text = '<ul>';
+      for (var i = 0; i < completeList.length; i++) {
+        text += '<li>' + completeList[i].fileName + '</li>';
+      }
+      text += '</ul>';
+      animatePlaylist.animate( 'Current playlist : ' + text );
+    } else {
+      animatePlaylist.animate( 'Nothing added in current playlist' );
+    }
+  }
 
   $scope.play = function() {
     stopall = 0;
@@ -80,10 +94,12 @@ mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, playli
 
   playFileList = function() {
     audio = playlistLocal.getFirst();
-    if( audio )
+    if( audio ) {
+      animatePlaylist.animate('Playin : ' + audio.fileName);
       getHttp.httpRequest(mainDomain.name + '/player/' + encodeURIComponent(audio.completePath) ).success(function(data, status, headers, config) {});
-    else
-      console.log('Nothing to play !');
+    } else {
+      animatePlaylist.animate('Current playlist is empty :(');
+    }
   }
 
   stopFileList = function() {
@@ -91,7 +107,7 @@ mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, playli
   }
 });
 
-mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, mainDomain, socketIoAngular, playlistLocal) {
+mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, mainDomain, socketIoAngular, playlistLocal, animatePlaylist) {
   currentFilePlaying = 0;
   $scope.savedFiles = [];
 
@@ -125,6 +141,7 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
   }
 
   $scope.playFile = function( audioFileName ) {
+    animatePlaylist.animate( audioFileName.fileName + ' added to list' );
     playlistLocal.set( audioFileName );
   }
 
@@ -194,6 +211,12 @@ mediaCenterApp.factory('playlistLocal', function(localStorageService, $rootScope
     localStorageService.set('playlist', JSON.stringify(playlist));
     $rootScope.$broadcast('audioplayer', 'updated');
   };
+  this.getCurrent = function() {
+    currentList = this.get();
+    if( currentList[0] )
+      return currentList[0].fileName;
+    return null;
+  };
   this.get = function() {
     playlist = localStorageService.get('playlist');
     if( ! playlist )
@@ -220,6 +243,21 @@ mediaCenterApp.factory('mainDomain', function($location) {
     return {
         name: $location.protocol() + "://" + $location.host() + ':' + $location.port()
     };
+});
+
+mediaCenterApp.factory('animatePlaylist', function(){
+  this.animate = function( msg ) {
+    jQuery('#message').html(msg);
+    jQuery('.playlist').removeClass('flipOutX');
+    jQuery('.playlist').css({ display:'block' });
+    jQuery('.playlist').addClass('flipInX');
+    setTimeout(function(){
+      jQuery('.playlist').removeClass('flipInX');
+      jQuery('.playlist').css({ display:'block' });
+      jQuery('.playlist').addClass('flipOutX');
+    }, 3000);
+  };
+  return this;
 });
 
 mediaCenterApp.factory('socketIoAngular', function($rootScope){

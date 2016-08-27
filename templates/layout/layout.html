@@ -9,6 +9,7 @@
       <link rel="stylesheet" type="text/css" href="{{asset 'css/main.css'}}"></link>
       <link rel="stylesheet" type="text/css" href="{{asset 'font-awesome/css/font-awesome.min.css'}}"></link>
       <link rel="stylesheet" type="text/css" href="{{asset 'css/loading-bar.css'}}"></link>
+      <link rel="stylesheet" type="text/css" href="{{asset 'css/animate.css'}}"></link>
       <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
       <script type="text/javascript" src="{{asset 'js/jquery-3.1.0.min.js'}}"></script>
       <script type="text/javascript" src="{{asset 'js/bootstrap.min.js'}}"></script>
@@ -26,21 +27,18 @@
         <div class="row">
           <div class="col-sm-4">
             <div>
-              <form class="aor">
+              <!--form class="aor">
                 <input class="form-control" type="text" placeholder="Search...">
                 <button type="submit" class="fm">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
-              </form>
+              </form-->
               <ul class="nav of nav-stacked">
                 <li>
                   <a href="/" class="">Home</a>
                 </li>
                 <li>
                   <a href="/artists" class="">Artistes</a>
-                </li>
-                <li>
-                  <a href="/playlists" class="">Playlist</a>
                 </li>
                 <li>
                   <a href="/youtube" class="">Youtube</a>
@@ -53,12 +51,15 @@
           </div>
         </div>
       </div>
-      <div class="player" ng-controller="PlayerCtrl">
-        <a href="#" ng-click="next();"><i class="fa fa-step-forward" aria-hidden="true"></i></a>
-        <a href="#" ng-click="play();"><i class="fa fa-play" aria-hidden="true"></i></a>
-        <a href="#" ng-click="stop();"><i class="fa fa-stop" aria-hidden="true"></i></a>
-        <div class="playlist">
-          <div ng-repeat="file in player" >{* file.fileName *}</div>
+      <div ng-controller="PlayerCtrl">
+        <div class="player">
+          <a href="#" ng-click="next();"><i class="fa fa-step-forward" aria-hidden="true"></i></a>
+          <a href="#" ng-click="play();"><i class="fa fa-play" aria-hidden="true"></i></a>
+          <a href="#" ng-click="stop();"><i class="fa fa-stop" aria-hidden="true"></i></a>
+          <a href="#" ng-click="list();"><i class="fa fa-list" aria-hidden="true"></i></a>
+        </div>
+        <div class="playlist animated flipOutX" style="display: none;">
+          <div id="message"></div>
         </div>
       </div>
       <hr class="rw aky">

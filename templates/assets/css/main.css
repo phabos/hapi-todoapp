@@ -3,8 +3,8 @@ body{
   font-weight: lighter;
   color: #252830;
   background-color: #252830;
-  padding: 50px 0;
-  background: url(/assets/images/01.png) no-repeat center fixed;
+  padding: 100px 0;
+  background: url(/assets/images/01-test.jpg) no-repeat center fixed;
   -webkit-background-size: cover;
   background-size: cover;
 }
@@ -56,7 +56,7 @@ footer {
   margin: 15px 0;
 }
 a {
-  color: #1ca8dd;
+  color: #337ab7;
   text-decoration: none;
 }
 a:hover {
@@ -78,7 +78,7 @@ a:hover {
   right: 50px;
   padding: 15px;
   border-radius: 100px;
-  background-color: #1ca8dd;
+  background-color: #337ab7;
   color: #252830;
   width: 50px;
   height: 50px;
@@ -96,7 +96,7 @@ a:hover {
 }
 .nav > li > a.active {
   color: #252830;
-  background-color: #1ca8dd;
+  background-color: #337ab7;
 }
 .nav > li > a:hover {
     text-decoration: none;
@@ -133,7 +133,7 @@ a:hover {
     display: inline-block;
     padding-left: 1em;
     padding-right: 1em;
-    color: #fff;
+    /*color: #fff;*/
     vertical-align: middle;
     background-color: transparent;
 }
@@ -220,7 +220,7 @@ a:hover {
   list-style: none;
 }
 .btn-primary {
-  background-color: #1ca8dd;
+  background-color: #337ab7;
   font-weight: lighter;
   color: #fff;
 }
@@ -229,7 +229,7 @@ a:hover {
 }
 .player {
   position: fixed;
-  top: 0px;
+  top: 10px;
   left: 0px;
   width: 100%;
   background-color: transparent;
@@ -256,11 +256,18 @@ a:hover {
   width: 40px;
   height: 40px;
 }
+.player a:nth-child(4) {
+  top: 10px;
+  right: 130px;
+  z-index: 998;
+  width: 40px;
+  height: 40px;
+}
 .player a {
   position: absolute;
   border-radius: 50px;
   color: #252830;
-  background-color: #1ca8dd;
+  background-color: #337ab7;
   -moz-box-shadow: 2px 2px 10px 0px #000000;
   -webkit-box-shadow: 2px 2px 10px 0px #000000;
   -o-box-shadow: 2px 2px 10px 0px #000000;
@@ -269,28 +276,37 @@ a:hover {
   z-index: 10000;
 }
 .player a:nth-child(1) i,
-.player a:nth-child(3) i {
+.player a:nth-child(3) i,
+.player a:nth-child(4) i {
   position: absolute;
   top: 13px;
   left: 14px;
 }
-.player div.playlist {
-  position: absolute;
-  top: 60px;
-  right: 10px;
+div.playlist {
+  position: fixed;
+  bottom: 10px;
+  right: 0;
+  left: 0;
   display: block;
-  background-color: rgba(95, 158, 160, 0.5);
+  z-index:100000;
+  background-color: #434857;
+  color: #fff;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
 }
 .player div.playlist div {
-  width: 120px;
+  width: 100%;
   padding: 5px;
   margin: 0;
-  padding: 0;
-  border-bottom: 2px solid #252830;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 12px;
-  white-space: nowrap;
+  /*overflow: hidden;
+  text-overflow: ellipsis;*/
+  /*font-size: 12px;*/
+  /*white-space: nowrap;*/
+}
+.playlist #message ul {
+  text-align: left;
 }
 .player a:nth-child(2) i {
   position: absolute;
