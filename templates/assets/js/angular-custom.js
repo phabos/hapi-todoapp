@@ -261,7 +261,7 @@ mediaCenterApp.factory('animatePlaylist', function(){
 });
 
 mediaCenterApp.factory('socketIoAngular', function($rootScope){
-  var socket = io.connect('http://192.168.1.4:9090');
+  var socket = io.connect('http://192.168.1.4');
   this.on = function(eventName, callback) {
     socket.on(eventName, function () {
       var args = arguments;
