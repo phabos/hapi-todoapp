@@ -59,10 +59,10 @@
       </div>
       <div ng-controller="PlayerCtrl">
         <div class="player">
-          <a href="javascript:void(0);" ng-click="next();"><i class="fa fa-step-forward" aria-hidden="true"></i></a>
-          <a href="javascript:void(0);" ng-click="play();"><i class="fa fa-play" aria-hidden="true"></i></a>
-          <a href="javascript:void(0);" ng-click="stop();"><i class="fa fa-stop" aria-hidden="true"></i></a>
-          <a href="javascript:void(0);" ng-click="list();"><i class="fa fa-list" aria-hidden="true"></i></a>
+          <a href="javascript:void(0);" ng-touch="next();"><i class="fa fa-step-forward" aria-hidden="true"></i></a>
+          <a href="javascript:void(0);" ng-touch="play();"><i class="fa fa-play" aria-hidden="true"></i></a>
+          <a href="javascript:void(0);" ng-touch="stop();"><i class="fa fa-stop" aria-hidden="true"></i></a>
+          <a href="javascript:void(0);" ng-touch="list();"><i class="fa fa-list" aria-hidden="true"></i></a>
         </div>
         <div class="playlist animated flipOutX" style="display: none;">
           <div id="message"></div>
@@ -80,6 +80,7 @@
       <script type="text/javascript" src="{{asset 'js/bootstrap.min.js'}}"></script>
       <script type="text/javascript" src="{{asset 'js/angular.min.js'}}"></script>
       <script type="text/javascript" src="{{asset 'js/angular-local-storage.min.js'}}"></script>
+      <script type="text/javascript" src="{{asset 'js/angular-touch.js'}}"></script>
       <script src="/socket.io/socket.io.js"></script>
       <script type="text/javascript" src="{{asset 'js/main.js'}}"></script>
       <script type="text/javascript" src="{{asset 'js/loading-bar.js'}}"></script>
