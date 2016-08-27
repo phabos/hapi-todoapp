@@ -65,7 +65,7 @@ mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, playli
 
   $scope.list = function() {
     completeList = playlistLocal.get();
-    if( completeList ) {
+    if( completeList.length > 0 ) {
       var text = '<ul>';
       for (var i = 0; i < completeList.length; i++) {
         text += '<li>' + completeList[i].fileName + '</li>';
