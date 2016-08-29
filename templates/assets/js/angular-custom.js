@@ -260,8 +260,11 @@ mediaCenterApp.factory('animatePlaylist', function(){
   return this;
 });
 
-mediaCenterApp.factory('socketIoAngular', function($rootScope){
-  var socket = io.connect('http://192.168.1.4');
+mediaCenterApp.factory('socketIoAngular', function($rootScope, $location){
+  if( $location.host() == 'localhost' )
+    var socket = io.connect( $location.protocol() + "://" + $location.host() + ':' + $location.port() );
+  else
+    var socket = io.connect( $location.protocol() + "://" + $location.host() );
   this.on = function(eventName, callback) {
     socket.on(eventName, function () {
       var args = arguments;
