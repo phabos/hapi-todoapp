@@ -2,11 +2,8 @@ body{
   font-family: 'Open Sans', sans-serif;
   font-weight: lighter;
   color: #252830;
-  background-color: #252830;
+  background-color: #E0CDA9;
   padding: 100px 0;
-  background: url(/assets/images/01-test.jpg) no-repeat center fixed;
-  -webkit-background-size: cover;
-  background-size: cover;
 }
 .main-title {
   border-bottom: 3px solid #252830;
@@ -95,7 +92,7 @@ a:hover {
   left:18px;
 }
 .nav > li > a.active {
-  color: #252830;
+  color: #fff;
   background-color: #337ab7;
 }
 .nav > li > a:hover {
@@ -215,7 +212,7 @@ a:hover {
 }
 .list ul li {
   margin: 5px 0;
-  padding: 0 0 5px 0;
+  padding: 10px 0;
   border-bottom: 1px solid #000;
   list-style: none;
 }
