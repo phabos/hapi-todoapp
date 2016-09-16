@@ -1,16 +1,47 @@
 /******** INIT APP / SET DEPENDENCIES ********/
-var mediaCenterApp = angular.module('mediaCenter', ['angular-loading-bar', 'LocalStorageModule', 'ngTouch']);
+var mediaCenterApp = angular.module('mediaCenter', ['angular-loading-bar', 'LocalStorageModule', 'ngTouch', 'ngRoute']);
+
+/************************/
 /******** CONFIG ********/
-// Symbols
+/************************/
+// Symbols config - avoid conflicts with mustache
 mediaCenterApp.config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('{*');
     $interpolateProvider.endSymbol('*}');
 });
-// Loader
+
+// Route provider config
+mediaCenterApp.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+      templateUrl: '/templates/home.html',
+      controller: 'HomeCtrl'
+    }).when("/artists", {
+      templateUrl: '/templates/home_artists.html',
+      controller: 'ArtistCtrl'
+    }).when("/youtube", {
+      templateUrl: '/templates/home_youtube.html',
+      controller: 'YoutubeCtrl'
+    }).when("/artist/:param", {
+      templateUrl: '/templates/artist.html',
+      controller: 'ArtistDetailCtrl'
+    }).otherwise({
+      redirectTo: '/'
+    });
+});
+
+// Loader config
 mediaCenterApp.config(function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = true;
 });
-/******** ARTICLE DETAIL CONTROLLER ********/
+
+/*****************************/
+/******** CONTROLLERS ********/
+/*****************************/
+// Homepage
+mediaCenterApp.controller('HomeCtrl', function($scope, $http, getHttp, mainDomain) {});
+
+// Artistes
 mediaCenterApp.controller('ArtistCtrl', function($scope, $http, getHttp, mainDomain) {
     $scope.saveArtist = function() {
       jQuery.post( "/artists/insert", {artistName: jQuery('input[name="artistName"]').val()}, function( data ) {
@@ -21,11 +52,13 @@ mediaCenterApp.controller('ArtistCtrl', function($scope, $http, getHttp, mainDom
       });
     }
 
-    $scope.deleteArtist = function( artistId ){
-      jQuery.get( "/artist/delete/" + artistId, function( data ) {
-          console.log(data);
-          getArtistsList();
-      });
+    $scope.deleteArtist = function( artistId ) {
+      if( confirm( 'Etes-vous sûr ?' ) ) {
+        jQuery.get( "/artist/delete/" + artistId, function( data ) {
+            console.log(data);
+            getArtistsList();
+        });
+      }
     }
 
     getArtistsList = function() {
@@ -38,6 +71,7 @@ mediaCenterApp.controller('ArtistCtrl', function($scope, $http, getHttp, mainDom
     getArtistsList();
 });
 
+// Youtube controller
 mediaCenterApp.controller('YoutubeCtrl', function($scope, $http, getHttp, mainDomain) {
   $scope.play = function() {
     getHttp.httpRequest(mainDomain.name + '/player/' + encodeURIComponent( jQuery('input[name="youtubeurl"]').val() ) ).success(function(data, status, headers, config) {
@@ -46,6 +80,7 @@ mediaCenterApp.controller('YoutubeCtrl', function($scope, $http, getHttp, mainDo
   }
 });
 
+// Player
 mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, playlistLocal, getHttp, mainDomain, animatePlaylist) {
   $scope.player = playlistLocal.getCurrent();
   stopall = 0;
@@ -107,9 +142,11 @@ mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, playli
   }
 });
 
-mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, mainDomain, socketIoAngular, playlistLocal, animatePlaylist) {
+// Article détail
+mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, mainDomain, socketIoAngular, playlistLocal, animatePlaylist, $routeParams) {
   currentFilePlaying = 0;
   $scope.savedFiles = [];
+  artistId = $routeParams.param;
 
   $scope.addAlbum = function() {
     jQuery.post( "/album/insert", {albumName: jQuery('input[name="albumName"]').val(), artistId: jQuery('.mainartist').data('id'), albumList: angular.toJson($scope.savedFiles)}, function( data ) {
@@ -166,7 +203,7 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
 
   getAlbumList = function() {
     console.log('artist list called ' + jQuery('.mainartist').data('id') );
-    getHttp.httpRequest(mainDomain.name + '/artist/albums/' + jQuery('.mainartist').data('id')).success(function(data, status, headers, config) {
+    getHttp.httpRequest(mainDomain.name + '/artist/albums/' + artistId ).success(function(data, status, headers, config) {
       if( data.length > 0 ) {
         for (var i = 0; i < data.length; i++) {
           data[i].list = angular.fromJson(data[i].list);
@@ -177,6 +214,7 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
   }
 
   getAlbumFolder = function( dir ) {
+    if( ! dir ) dir = '';
     console.log('folder list called ' + dir);
     getHttp.httpRequest(mainDomain.name + '/filesystem/' + ( dir ? dir : 'empty' )).success(function(data, status, headers, config) {
       console.log(data);
@@ -184,10 +222,22 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
     });
   }
 
+  getArtistName = function() {
+    getHttp.httpRequest(mainDomain.name + '/artist/' + artistId ).success(function(data, status, headers, config) {
+      console.log(data);
+      $scope.artist = data;
+    });
+  }
+
+  getArtistName();
   getAlbumList();
   getAlbumFolder();
 });
 
+/***************************/
+/******** FACTORIES ********/
+/***************************/
+// Http
 mediaCenterApp.factory('getHttp', function($http) {
     this.httpRequest = function(url) {
         return $http.get(url, {
@@ -204,6 +254,7 @@ mediaCenterApp.factory('getHttp', function($http) {
     return this;
 });
 
+// Playlist
 mediaCenterApp.factory('playlistLocal', function(localStorageService, $rootScope){
   this.set = function(list) {
     playlist = this.get('playlist');
@@ -239,12 +290,14 @@ mediaCenterApp.factory('playlistLocal', function(localStorageService, $rootScope
   return this;
 });
 
+// Main domain
 mediaCenterApp.factory('mainDomain', function($location) {
     return {
         name: $location.protocol() + "://" + $location.host() + ':' + $location.port()
     };
 });
 
+// Animate playlist
 mediaCenterApp.factory('animatePlaylist', function(){
   this.animate = function( msg ) {
     jQuery('#message').html(msg);
@@ -260,6 +313,7 @@ mediaCenterApp.factory('animatePlaylist', function(){
   return this;
 });
 
+// Socket IO
 mediaCenterApp.factory('socketIoAngular', function($rootScope, $location){
   if( $location.host() == 'localhost' )
     var socket = io.connect( $location.protocol() + "://" + $location.host() + ':' + $location.port() );

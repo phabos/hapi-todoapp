@@ -23,7 +23,7 @@ var artists = {
     artist: function( request, reply ) {
       Artist.findOne({ _id: request.params.id }).exec( function(err, artistDetail) {
         if (err) throw err;
-        return reply.view( 'artist', { artist: artistDetail } );
+        return reply( artistDetail );
       });
     },
     albums: function( request, reply ) {

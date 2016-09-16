@@ -1,4 +1,4 @@
-<div class="mainartist" ng-controller="ArtistCtrl">
+<div class="mainartist">
   <h2>Artistes</h2>
   <div class="clear"></div>
   <div class="anv alg ala">
@@ -8,7 +8,7 @@
   <div class="list">
     <ul>
     <li ng-repeat="artist in artists" class="artist-list">
-      <a href="artist/{* artist._id *}">{* artist.name *}</a><a href="#" class="fleft" ng-click="deleteArtist( artist._id )"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+      <a href="#artist/{* artist._id *}">{* artist.name *}</a><a href="#" class="fleft" ng-click="deleteArtist( artist._id )"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
     </li>
   </ul>
   </div>

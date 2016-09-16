@@ -24,6 +24,7 @@
       <script type="text/javascript" src="{{asset 'js/jquery-3.1.0.min.js'}}"></script>
       <script type="text/javascript" src="{{asset 'js/bootstrap.min.js'}}"></script>
       <script type="text/javascript" src="{{asset 'js/angular.min.js'}}"></script>
+      <script type="text/javascript" src="{{asset 'js/angular-route.min.js'}}"></script>
       <script type="text/javascript" src="{{asset 'js/angular-local-storage.min.js'}}"></script>
       <script type="text/javascript" src="{{asset 'js/angular-touch.js'}}"></script>
     </head>
@@ -46,28 +47,27 @@
               </form-->
               <ul class="nav of nav-stacked">
                 <li>
-                  <a href="/" class="">Home</a>
+                  <a href="#/" class="">Home</a>
                 </li>
                 <li>
-                  <a href="/artists" class="">Artistes</a>
+                  <a href="#artists" class="">Artistes</a>
                 </li>
                 <li>
-                  <a href="/youtube" class="">Youtube</a>
+                  <a href="#youtube" class="">Youtube</a>
                 </li>
               </ul>
             </div>
           </div>
-          <div class="main col-sm-8">
-            {{{content}}}
+          <div class="main col-sm-8" ng-view>
           </div>
         </div>
       </div>
       <div ng-controller="PlayerCtrl">
         <div class="player">
-          <a href="#" ng-click="next();"><i class="fa fa-step-forward" aria-hidden="true"></i></a>
-          <a href="#" ng-click="play();"><i class="fa fa-play" aria-hidden="true"></i></a>
-          <a href="#" ng-click="stop();"><i class="fa fa-stop" aria-hidden="true"></i></a>
-          <a href="#" ng-click="list();"><i class="fa fa-list" aria-hidden="true"></i></a>
+          <a href="" ng-click="next();"><i class="fa fa-step-forward" aria-hidden="true"></i></a>
+          <a href="" ng-click="play();"><i class="fa fa-play" aria-hidden="true"></i></a>
+          <a href="" ng-click="stop();"><i class="fa fa-stop" aria-hidden="true"></i></a>
+          <a href="" ng-click="list();"><i class="fa fa-list" aria-hidden="true"></i></a>
         </div>
         <div class="playlist animated flipOutX" style="display: none;">
           <div id="message"></div>

@@ -18,6 +18,17 @@ module.exports = [
     }
   },
   {
+    method: "GET",
+    path: "/templates/{path*}",
+    handler: {
+        directory: {
+            path: "./templates/",
+            listing: false,
+            index: false
+        }
+    }
+  },
+  {
       method: 'GET',
       path:'/',
       handler: function (request, reply) {

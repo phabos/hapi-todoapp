@@ -1,14 +1,14 @@
-<div class="mainartist" ng-controller="ArtistDetailCtrl" data-id="{{artist._id}}">
-  <h2>{{artist.name}}</h2>
+<div class="mainartist">
+  <h2>{* artist.name *}</h2>
   <div class="clear"></div><br/>
   <div ng-repeat="(key, album) in albums">
     <div class="anv alg ala">
-      <h3 class="anw anx"><a href="#" ng-click="playAlbum( key )">{* album.name *}</a></h3>
+      <h3 class="anw anx"><a href="" ng-click="playAlbum( key )">{* album.name *}</a></h3>
     </div>
     <div class="clear"></div><br/>
     <div class="list">
       <ul>
-        <li ng-repeat="track in album.list track by $index"><a href="#" ng-click="playFile( track )">{* track.fileName *}</li>
+        <li ng-repeat="track in album.list track by $index"><a href="" ng-click="playFile( track )">{* track.fileName *}</li>
       </ul>
     </div>
   </div>
@@ -17,7 +17,7 @@
   </div>
   <div class="clear"></div>
 
-  <a href="#" class="add-btn" data-toggle="modal" data-target="#addAlbumModal"><i class="fa fa-plus" aria-hidden="true"></i></a>
+  <a href="" class="add-btn" data-toggle="modal" data-target="#addAlbumModal"><i class="fa fa-plus" aria-hidden="true"></i></a>
 
   <!-- Modal -->
   <div class="modal fade" id="addAlbumModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -33,9 +33,9 @@
               {* file.fileName *}<br/>
             </div>
             <hr/>
-            <a ng-click="parentDirList()" href="#">Parent ..</a>
+            <a ng-click="parentDirList()" href="">Parent ..</a>
             <div ng-repeat="file in files.files">
-              <a ng-click="isAudioFile( file ) ? addToList( files.current + '/' + file ) : sonDirList( files.current + '/' + file )" href="#">{* file *}</a>
+              <a ng-click="isAudioFile( file ) ? addToList( files.current + '/' + file ) : sonDirList( files.current + '/' + file )" href="">{* file *}</a>
             </div>
         </div>
         <div class="modal-footer">
