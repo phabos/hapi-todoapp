@@ -176,7 +176,7 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
     });
   }
 
-  getAlbumFolder = function( dir = '' ) {
+  getAlbumFolder = function( dir ) {
     console.log('folder list called ' + dir);
     getHttp.httpRequest(mainDomain.name + '/filesystem/' + ( dir ? dir : 'empty' )).success(function(data, status, headers, config) {
       console.log(data);
