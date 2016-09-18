@@ -236,7 +236,6 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
 
 mediaCenterApp.controller('MenuCtrl', function($scope, $location) {
   $scope.getClass = function ( path ) {
-    console.log(path + '/' + $location.path());
     return ($location.path() === path) ? 'active' : '';
   }
 });
