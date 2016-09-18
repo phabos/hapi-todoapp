@@ -1,11 +1,18 @@
 jQuery( document ).ready(function() {
-  highlightMenu();
+  //highlightMenu();
 });
 
 function highlightMenu() {
-  jQuery('.nav li a').each(function(){
-    jQuery(this).removeClass( 'active' );
-    if( jQuery(this).attr('href') == window.location.pathname )
+  jQuery('.nav li a').each(function() {
+    jQuery(this).on('click', function() {
+      removeAllActiveItems();
       jQuery(this).addClass( 'active' );
+    });
+  });
+}
+
+function removeAllActiveItems() {
+  jQuery('.nav li a').each(function() {
+    jQuery(this).removeClass( 'active' );
   });
 }

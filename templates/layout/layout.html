@@ -36,7 +36,7 @@
             <div class="clear"></div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" ng-controller="MenuCtrl">
           <div class="col-sm-4">
             <div>
               <!--form class="aor">
@@ -47,13 +47,13 @@
               </form-->
               <ul class="nav of nav-stacked">
                 <li>
-                  <a href="#/" class="">Home</a>
+                  <a href="#/" ng-class="getClass('/')">Home</a>
                 </li>
                 <li>
-                  <a href="#artists" class="">Artistes</a>
+                  <a href="#artists" ng-class="getClass('/artists')">Artistes</a>
                 </li>
                 <li>
-                  <a href="#youtube" class="">Youtube</a>
+                  <a href="#youtube" ng-class="getClass('/youtube')">Youtube</a>
                 </li>
               </ul>
             </div>
