@@ -305,16 +305,16 @@ mediaCenterApp.factory('mainDomain', function($location) {
 
 // Animate playlist
 mediaCenterApp.factory('animatePlaylist', function(){
+  this.running = 0;
   this.animate = function( msg ) {
     jQuery('#message').html(msg);
-    jQuery('.playlist').removeClass('flipOutX');
-    jQuery('.playlist').css({ display:'block' });
-    jQuery('.playlist').addClass('flipInX');
-    setTimeout(function(){
-      jQuery('.playlist').removeClass('flipInX');
-      jQuery('.playlist').css({ display:'block' });
-      jQuery('.playlist').addClass('flipOutX');
-    }, 3000);
+    if( ! this.running ) {
+      jQuery('.playlist').addClass('animated');
+      setTimeout(function() {
+        this.running = 1;
+        jQuery('.playlist').removeClass('animated');
+      }, 10000);
+    }
   };
   return this;
 });

@@ -281,7 +281,7 @@ a:hover {
 }
 div.playlist {
   position: fixed;
-  bottom: 10px;
+  top: -200px;
   right: 0;
   left: 0;
   display: block;
@@ -292,6 +292,19 @@ div.playlist {
   padding: 10px;
   text-align: center;
   border-radius: 5px;
+  /*webkit-transition: all 2s;
+  transition: all 2s;*/
+}
+div.playlist.animated{
+  animation-name: up_and_down;
+	animation-duration: 10s;
+	animation-iteration-count: 1;
+}
+@keyframes up_and_down {
+	0% { top: -200px; }
+  20% { top: 10px; }
+	70% { top: 10px; }
+	100% { top: -200px; }
 }
 .player div.playlist div {
   width: 100%;
