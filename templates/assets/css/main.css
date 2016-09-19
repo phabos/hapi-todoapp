@@ -187,6 +187,9 @@ a:hover {
 .acenter {
   text-align: center;
 }
+.modal{
+  z-index:12000;
+}
 .modal a:hover,
 .modal {
   color: #666;
@@ -302,8 +305,8 @@ div.playlist.animated{
 }
 @keyframes up_and_down {
 	0% { top: -200px; }
-  20% { top: 10px; }
-	70% { top: 10px; }
+  20% { top: 100px; }
+	70% { top: 100px; }
 	100% { top: -200px; }
 }
 .player div.playlist div {
