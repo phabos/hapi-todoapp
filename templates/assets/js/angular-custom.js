@@ -72,11 +72,32 @@ mediaCenterApp.controller('ArtistCtrl', function($scope, $http, getHttp, mainDom
 });
 
 // Youtube controller
-mediaCenterApp.controller('YoutubeCtrl', function($scope, $http, getHttp, mainDomain) {
-  $scope.play = function() {
-    getHttp.httpRequest(mainDomain.name + '/player/' + encodeURIComponent( jQuery('input[name="youtubeurl"]').val() ) ).success(function(data, status, headers, config) {
-      console.log(data);
-    });
+mediaCenterApp.controller('YoutubeCtrl', function($scope, $http, getHttp, mainDomain, socketIoAngular) {
+
+  var download = 0;
+
+  socketIoAngular.on('downloadoutput', function(socket, args) {
+    jQuery("#youtubedl-msg").show();
+    jQuery("#loading-stuff").show();
+    msg = socket + '<br/>' + jQuery("#youtubedl-msg").html();
+    jQuery("#youtubedl-msg").html(msg);
+    if( socket == 'downloadStop' ) {
+      download = 0;
+      jQuery("#loading-stuff").hide();
+    }
+  });
+
+  $scope.download = function() {
+    if( ! download ) {
+      download = 1;
+      jQuery("#youtubedl-msg").hide().html('');
+      jQuery("#loading-stuff").hide();
+      getHttp.httpRequest(mainDomain.name + '/youtube/dl/' + encodeURIComponent( jQuery('input[name="youtubeurl"]').val() ) ).success(function(data, status, headers, config) {
+        console.log(data);
+      });
+    }else {
+      console.log("Downloading already launch");
+    }
   }
 });
 
@@ -149,7 +170,7 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
   artistId = $routeParams.param;
 
   $scope.addAlbum = function() {
-    jQuery.post( "/album/insert", {albumName: jQuery('input[name="albumName"]').val(), artistId: jQuery('.mainartist').data('id'), albumList: angular.toJson($scope.savedFiles)}, function( data ) {
+    jQuery.post( "/album/insert", {albumName: jQuery('input[name="albumName"]').val(), artistId: artistId, albumList: angular.toJson($scope.savedFiles)}, function( data ) {
         console.log(data);
         jQuery('input[name="albumName"]').val('');
         $('#addAlbumModal').modal('hide');
@@ -166,7 +187,7 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
   }
 
   $scope.isAudioFile = function( filename ) {
-    return ['mp3', 'wav', 'flac', 'mp4', 'wma'].indexOf( filename.split('.').pop() ) >= 0;
+    return ['mp3', 'wav', 'flac', 'mp4', 'wma', 'opus'].indexOf( filename.split('.').pop() ) >= 0;
   }
 
   $scope.addToList = function( file ) {
@@ -310,10 +331,12 @@ mediaCenterApp.factory('animatePlaylist', function(){
     jQuery('#message').html(msg);
     if( ! this.running ) {
       jQuery('.playlist').addClass('animated');
-      setTimeout(function() {
+      timeout = setTimeout(function() {
         this.running = 1;
         jQuery('.playlist').removeClass('animated');
       }, 10000);
+    }else {
+      clearTimeout(timeout);
     }
   };
   return this;

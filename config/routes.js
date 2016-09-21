@@ -114,6 +114,13 @@ module.exports = [
   },
   {
       method: 'GET',
+      path:'/youtube/dl/{url}',
+      handler: function (request, reply) {
+          return youtubeController.youtubedl( request, reply );
+      }
+  },
+  {
+      method: 'GET',
       path:'/youtube',
       handler: function (request, reply) {
           return youtubeController.home( request, reply );

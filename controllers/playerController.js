@@ -33,7 +33,7 @@ var player = {
 
       vlc.on('close', (code, signal) => {
         console.log(`child process exited with code ${code} / ${signal} `);
-        require('../config/server').server.sendMessage('stop');
+        require('../config/server').server.sendMessage( 'message', 'stop' );
       });
     },
     stop: function( request, reply ) {

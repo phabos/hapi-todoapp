@@ -67,8 +67,10 @@ var server = {
     getSocketIo: function() {
         return this.sio;
     },
-    sendMessage: function( msg ) {
-        this.sio.emit('message', msg);
+    sendMessage: function( type, msg ) {
+        if( ! type )
+          type = 'message';
+        this.sio.emit(type, msg);
     }
 }
 
