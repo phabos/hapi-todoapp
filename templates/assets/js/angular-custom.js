@@ -82,8 +82,8 @@ mediaCenterApp.controller('YoutubeCtrl', function($scope, $http, getHttp, mainDo
     msg = socket + '<br/>' + jQuery("#youtubedl-msg").html();
     jQuery("#youtubedl-msg").html(msg);
     if( socket == 'downloadStop' ) {
+      jQuery("#loading-stuff").css("display", "none");
       download = 0;
-      jQuery("#loading-stuff").hide();
     }
   });
 

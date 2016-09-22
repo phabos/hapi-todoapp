@@ -300,7 +300,7 @@ div.playlist {
 }
 div.playlist.animated{
   animation-name: up_and_down;
-	animation-duration: 10s;
+	animation-duration: 7s;
 	animation-iteration-count: 1;
 }
 @keyframes up_and_down {
