@@ -34,11 +34,27 @@ var artists = {
     },
     albumInsert: function( request, reply ) {
       // Validation
-      var album = new ArtistAlbum({ name: request.payload.albumName, artistId: request.payload.artistId, list: request.payload.albumList});
+      ArtistAlbum.findOne({ name: request.payload.albumName }).exec( function(err, artistAlbum) {
+        if (err) throw err;
+        if( ! artistAlbum ) {
+          var album = new ArtistAlbum({ name: request.payload.albumName, artistId: request.payload.artistId, list: request.payload.albumList});
+          album.save(function(err) {
+            if (err) throw err;
+            return reply({ error: 0, msg: 'album inserted' }).code( 200 );
+          });
+        }else{
+          var concat = JSON.stringify( JSON.parse( artistAlbum.list ).concat( JSON.parse( request.payload.albumList ) ) );
+          ArtistAlbum.update( { _id : artistAlbum._id }, { list : concat }, { upsert : true }, function(err){
+            if (err) throw err;
+            return reply({ error: 0, msg: 'album updated' }).code( 200 );
+          });
+        }
+      });
+      /*var album = new ArtistAlbum({ name: request.payload.albumName, artistId: request.payload.artistId, list: request.payload.albumList});
       album.save(function(err) {
         if (err) throw err;
         return reply({ error: 0, msg: 'album inserted' }).code( 200 );
-      });
+      });*/
     },
     delete: function( request, reply ) {
       Artist.remove({ _id: request.params.id }, function(err,removed) {

@@ -187,7 +187,7 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
   }
 
   $scope.isAudioFile = function( filename ) {
-    return ['mp3', 'wav', 'flac', 'mp4', 'wma', 'opus'].indexOf( filename.split('.').pop() ) >= 0;
+    return ['mp3', 'wav', 'flac', 'mp4', 'wma', 'opus', 'm4a'].indexOf( filename.split('.').pop() ) >= 0;
   }
 
   $scope.addToList = function( file ) {
@@ -326,18 +326,14 @@ mediaCenterApp.factory('mainDomain', function($location) {
 
 // Animate playlist
 mediaCenterApp.factory('animatePlaylist', function(){
-  this.running = 0;
   this.animate = function( msg ) {
-    jQuery('#message').html(msg);
-    if( ! this.running ) {
-      jQuery('.playlist').addClass('animated');
-      timeout = setTimeout(function() {
-        this.running = 1;
-        jQuery('.playlist').removeClass('animated');
-      }, 10000);
-    }else {
-      clearTimeout(timeout);
-    }
+    var currentElt = jQuery( '.msg' ).length;
+    $(".player-ctrl").append( '<div class="playlist playlist' + currentElt + '"><div id="message' + currentElt + '" class="msg"></div></div>' );
+    jQuery( '#message' + currentElt ).html( msg );
+    jQuery('.playlist'  + currentElt ).addClass( 'animated' );
+    timeout = setTimeout(function() {
+      jQuery('.playlist' + currentElt ).remove();
+    }, 10000);
   };
   return this;
 });
