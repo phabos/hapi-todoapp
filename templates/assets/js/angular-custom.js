@@ -119,11 +119,11 @@ mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, getHtt
     getHttp.httpRequest( mainDomain.name + '/vlc/playlist' ).success(function(data, status, headers, config) {
       var playlist = data.children[0].children;
       if( playlist.length > 0 ) {
-        var text = '<ul>';
+        var text = '<div>';
         for (var i = 0; i < playlist.length; i++) {
-          text += '<li>' + playlist[i].name + '</li>';
+          text += '<i class="fa fa-chevron-right" aria-hidden="true"></i> ' + playlist[i].name + '<br/>';
         }
-        text += '</ul>';
+        text += '</div>';
         animatePlaylist.animate( 'Current playlist : ' + text );
       } else {
         animatePlaylist.animate( 'Nothing added in current playlist' );

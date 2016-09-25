@@ -225,7 +225,7 @@ a:hover {
 .player {
   position: fixed;
   height: 60px;
-  background-color: #434857;
+  background-color: rgba(67, 72, 87, 0.9);
   bottom: 0px;
   left: 0px;
   width: 100%;
@@ -267,11 +267,10 @@ div.playlist {
   left: 0;
   display: block;
   z-index:100000;
-  background-color: rgba(67, 72, 87, 0.8);
+  background-color: rgba(67, 72, 87, 0.9);
   color: #fff;
   margin: 10px;
   padding: 10px;
-  text-align: center;
   border-radius: 5px;
   /*webkit-transition: all 2s;
   transition: all 2s;*/
