@@ -2,12 +2,12 @@ body{
   font-family: 'Open Sans', sans-serif;
   font-weight: lighter;
   color: #252830;
-  background-color: #E0CDA9;
+  background-color: #efefef;
   padding: 100px 0;
 }
 .main-title {
-  border-bottom: 3px solid #252830;
-  margin-bottom: 40px;
+  /*border-bottom: 3px solid #252830;*/
+  margin-top: 10px;
   padding-bottom: 20px;
   font-weight: lighter;
 }
@@ -52,31 +52,35 @@ footer {
 .list {
   margin: 15px 0;
 }
+nav {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.navbar-brand {
+  float:right !important;
+}
+.nav-item {
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+}
 a {
-  color: #337ab7;
+  color: #ff2d55;
   text-decoration: none;
 }
+a:focus,
 a:hover {
-  color: #fff;
+  color: #999;
   text-decoration: none;
 }
-.nav > li > a {
-    position: relative;
-    display: block;
-    padding: 7px 15px;
-    text-decoration: none;
-    color: #252830;
-    border-radius: 5px;
-    margin-top: 5px;
-}
+.add-btn:hover,
+.add-btn:visited,
 .add-btn {
   position: fixed;
-  bottom: 50px;
+  top: 50px;
   right: 50px;
   padding: 15px;
   border-radius: 100px;
-  background-color: #337ab7;
-  color: #252830;
+  background-color: #FF2D55;
+  color: #fff;
   width: 50px;
   height: 50px;
   -moz-box-shadow: 2px 2px 10px 0px #000000;
@@ -91,21 +95,12 @@ a:hover {
   top:18px;
   left:18px;
 }
-.nav > li > a.active {
-  color: #fff;
-  background-color: #337ab7;
-}
-.nav > li > a:hover {
-    text-decoration: none;
-    background-color: #434857;
-    color: #cfd2da;
-}
 .anv {
     position: relative;
     font-size: 12px;
     line-height: 20px;
     text-align: center;
-    text-transform: uppercase;
+    text-transform: none;
 }
 .anx {
     margin-top: 0;
@@ -139,7 +134,7 @@ a:hover {
     font-size: 12px;
     line-height: 20px;
     text-align: center;
-    text-transform: uppercase;
+    text-transform: none;
     margin: 0 0 10px 0;
 }
 .apn {
@@ -206,82 +201,65 @@ a:hover {
   text-transform: uppercase;
   text-align: center;
 }
-.fleft {
-  float: right;
-  margin-top:5px;
-}
 .list ul {
   padding-left: 0;
 }
 .list ul li {
   margin: 5px 0;
   padding: 10px 0;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid rgba(0,0,0,.1);
   list-style: none;
 }
 .btn-primary {
-  background-color: #337ab7;
+  background-color: #ff2d55;
   font-weight: lighter;
   color: #fff;
+  border: none;
+}
+.btn-primary:hover{
+  background-color: #999;
 }
 .text-right {
   text-align: right;
 }
 .player {
   position: fixed;
-  top: 10px;
+  height: 60px;
+  background-color: #434857;
+  bottom: 0px;
   left: 0px;
   width: 100%;
-  background-color: transparent;
   z-index: 10000;
 }
-.player a:nth-child(1) {
-  top: 10px;
-  right: 10px;
-  z-index: 999;
-  width: 40px;
-  height: 40px;
-}
-.player a:nth-child(2) {
-  top: 6px;
-  right: 46px;
-  z-index: 1000;
-  width: 50px;
-  height: 50px;
-}
-.player a:nth-child(3) {
-  top: 10px;
-  right: 90px;
-  z-index: 999;
-  width: 40px;
-  height: 40px;
-}
-.player a:nth-child(4) {
-  top: 10px;
-  right: 130px;
-  z-index: 998;
-  width: 40px;
-  height: 40px;
-}
 .player a {
-  position: absolute;
   border-radius: 50px;
-  color: #252830;
-  background-color: #337ab7;
+  color: #fff;
+  background-color: #ff2d55;
   -moz-box-shadow: 2px 2px 10px 0px #000000;
   -webkit-box-shadow: 2px 2px 10px 0px #000000;
   -o-box-shadow: 2px 2px 10px 0px #000000;
   box-shadow: 2px 2px 10px 0px #000000;
   filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=134, Strength=10);
   z-index: 10000;
+  width:40px;
+  height: 40px;
+  display: inline-block;
+  position: relative;
 }
-.player a:nth-child(1) i,
-.player a:nth-child(3) i,
-.player a:nth-child(4) i {
+.player a i {
   position: absolute;
-  top: 13px;
-  left: 14px;
+  left: 13px;
+  top: 11px;
 }
+.fleft{
+  float: left;
+  margin: 10px 0 0 10px;
+}
+.fright{
+  float: right;
+  margin: 10px 10px 0 0;
+}
+
 div.playlist {
   position: fixed;
   top: -200px;
@@ -289,7 +267,7 @@ div.playlist {
   left: 0;
   display: block;
   z-index:100000;
-  background-color: #434857;
+  background-color: rgba(67, 72, 87, 0.8);
   color: #fff;
   margin: 10px;
   padding: 10px;
@@ -321,15 +299,9 @@ div.playlist.animated{
 .playlist #message ul {
   text-align: left;
 }
-.player a:nth-child(2) i {
-  position: absolute;
-  top: 17px;
-  left: 19px;
-}
 @media (max-width: 545px) {
   .main {
     margin-top: 20px;
-    border-top: 4px solid #000;
   }
   .main h2 {
     margin-top:.5rem;

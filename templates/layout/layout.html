@@ -28,45 +28,43 @@
       <script type="text/javascript" src="{{asset 'js/angular-touch.js'}}"></script>
     </head>
     <body ng-app="mediaCenter">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12 acenter">
-            <h1 class="main-title"><i class="fa fa-headphones" aria-hidden="true"></i> Media center</h1>
-            <div class="clear"></div>
-          </div>
+      <nav class="navbar navbar-fixed-top navbar-light bg-faded" ng-controller="MenuCtrl">
+        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
+          &#9776;
+        </button>
+        <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+          <a class="navbar-brand" href="#"><i class="fa fa-headphones" aria-hidden="true"></i> Media center</a>
+          <ul class="nav navbar-nav">
+            <li class="nav-item" ng-class="getClass('/')">
+              <a href="#/">Home</a>
+            </li>
+            <li class="nav-item" ng-class="getClass('/artists')">
+              <a href="#artists">Artistes</a>
+            </li>
+            <li class="nav-item" ng-class="getClass('/youtube')">
+              <a href="#youtube">Youtube</a>
+            </li>
+          </ul>
         </div>
-        <div class="row" ng-controller="MenuCtrl">
-          <div class="col-sm-4">
-            <div>
-              <!--form class="aor">
-                <input class="form-control" type="text" placeholder="Search...">
-                <button type="submit" class="fm">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form-->
-              <ul class="nav of nav-stacked">
-                <li>
-                  <a href="#/" ng-class="getClass('/')">Home</a>
-                </li>
-                <li>
-                  <a href="#artists" ng-class="getClass('/artists')">Artistes</a>
-                </li>
-                <li>
-                  <a href="#youtube" ng-class="getClass('/youtube')">Youtube</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="main col-sm-8" ng-view>
+      </nav>
+      <div class="container">
+        <div class="row" >
+          <div class="main col-xs-12" ng-view>
           </div>
         </div>
       </div>
       <div ng-controller="PlayerCtrl" class="player-ctrl">
         <div class="player">
-          <a href="" ng-click="next();"><i class="fa fa-step-forward" aria-hidden="true"></i></a>
-          <a href="" ng-click="play();"><i class="fa fa-play" aria-hidden="true"></i></a>
-          <a href="" ng-click="stop();"><i class="fa fa-stop" aria-hidden="true"></i></a>
-          <a href="" ng-click="list();"><i class="fa fa-list" aria-hidden="true"></i></a>
+          <div class="fleft">
+            <a href="" ng-click="previous();"><i class="fa fa-step-backward" aria-hidden="true"></i></a>
+            <a href="" ng-click="play();"><i class="fa {* currentState *}" aria-hidden="true"></i></a>
+            <a href="" ng-click="next();"><i class="fa fa-step-forward" aria-hidden="true"></i></a>
+            <a href="" ng-click="stop();"><i class="fa fa-stop" aria-hidden="true"></i></a>
+          </div>
+          <div class="fright">
+            <a href="" ng-click="trash();"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            <a href="" ng-click="list();"><i class="fa fa-list" aria-hidden="true"></i></a>
+          </div>
         </div>
       </div>
       <hr class="rw aky">
