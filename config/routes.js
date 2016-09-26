@@ -4,6 +4,7 @@ var playlistsController = require( __dirname + '/../controllers/playlistsControl
 var youtubeController = require( __dirname + '/../controllers/youtubeController').youtube;
 var filesystemController = require( __dirname + '/../controllers/filesystemController').filesystem;
 var playerController = require( __dirname + '/../controllers/playerController').player;
+var vlcController = require( __dirname + '/../controllers/vlcController').vlc;
 
 module.exports = [
   {
@@ -124,6 +125,13 @@ module.exports = [
       path:'/youtube',
       handler: function (request, reply) {
           return youtubeController.home( request, reply );
+      }
+  },
+  {
+      method: 'GET',
+      path:'/vlc/{action}/{val?}',
+      handler: function (request, reply) {
+          return vlcController.home( request, reply );
       }
   },
 ]
