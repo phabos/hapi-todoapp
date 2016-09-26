@@ -216,6 +216,7 @@ a:hover {
   color: #fff;
   border: none;
 }
+.btn-primary:active,
 .btn-primary:hover{
   background-color: #999;
 }
@@ -230,6 +231,35 @@ a:hover {
   left: 0px;
   width: 100%;
   z-index: 10000;
+}
+#master {
+  display: inline-block;
+  width: 150px;
+  margin: 15px;
+}
+.ui-widget-header {
+  background: #ff2d55;
+}
+.ui-widget.ui-widget-content{
+  border: none;
+}
+.ui-state-hover,
+.ui-state-focus {
+  border:none !important;
+  color: #efefef !important;
+}
+.ui-slider-horizontal .ui-slider-handle {
+  top: -.4em;
+}
+.ui-widget-content {
+  background: #efefef;
+}
+.ui-slider-horizontal {
+  height: .2em;
+}
+.ui-corner-all {
+  border: none;
+  border-radius: 12px !important;
 }
 .player a {
   border-radius: 50px;
@@ -259,7 +289,9 @@ a:hover {
   float: right;
   margin: 10px 10px 0 0;
 }
-
+.fright{
+  float: right;
+}
 div.playlist {
   position: fixed;
   top: -200px;

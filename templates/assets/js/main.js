@@ -1,6 +1,4 @@
-jQuery( document ).ready(function() {
-  //highlightMenu();
-});
+jQuery( document ).ready(function() {});
 
 function highlightMenu() {
   jQuery('.nav li a').each(function() {

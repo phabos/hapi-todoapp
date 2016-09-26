@@ -161,6 +161,19 @@ mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, getHtt
     getHttp.httpRequest( mainDomain.name + '/vlc/previous' ).success(function(data, status, headers, config) {});
   }
 
+  // Deal with jquery master volume
+  jQuery( "#master" ).slider({
+    value: 60,
+    orientation: "horizontal",
+    range: "min",
+    min: 0,
+    max: 200,
+    animate: true,
+    stop: function( event, ui ) {
+      getHttp.httpRequest( mainDomain.name + '/vlc/volume/' + ui.value ).success(function(data, status, headers, config) {});
+    }
+  });
+
   getCurrentState();
 });
 

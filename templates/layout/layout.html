@@ -6,6 +6,7 @@
       <meta name="HandheldFriendly" content="True" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="stylesheet" type="text/css" href="{{asset 'css/bootstrap.min.css'}}"></link>
+      <link rel="stylesheet" type="text/css" href="{{asset 'css/jquery-ui.css'}}"></link>
       <link rel="stylesheet" type="text/css" href="{{asset 'css/main.css'}}"></link>
       <link rel="stylesheet" type="text/css" href="{{asset 'font-awesome/css/font-awesome.min.css'}}"></link>
       <link rel="stylesheet" type="text/css" href="{{asset 'css/loading-bar.css'}}"></link>
@@ -21,6 +22,7 @@
       <link rel="apple-touch-icon" sizes="152x152" href="{{asset 'images/icons/apple-touch-icon-152x152.png'}}"></link>
       <link rel="apple-touch-icon" sizes="180x180" href="{{asset 'images/icons/apple-touch-icon-180x180.png'}}"></link>
       <script type="text/javascript" src="{{asset 'js/jquery-3.1.0.min.js'}}"></script>
+      <script type="text/javascript" src="{{asset 'js/jquery-ui-v1.12.1.js'}}"></script>
       <script type="text/javascript" src="{{asset 'js/bootstrap.min.js'}}"></script>
       <script type="text/javascript" src="{{asset 'js/angular.min.js'}}"></script>
       <script type="text/javascript" src="{{asset 'js/angular-route.min.js'}}"></script>
@@ -62,6 +64,7 @@
             <a href="" ng-click="stop();"><i class="fa fa-stop" aria-hidden="true"></i></a>
           </div>
           <div class="fright">
+            <div id="master"></div>
             <a href="" ng-click="trash();"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
             <a href="" ng-click="list();"><i class="fa fa-list" aria-hidden="true"></i></a>
           </div>
