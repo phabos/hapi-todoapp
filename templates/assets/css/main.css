@@ -217,6 +217,7 @@ a:hover {
   border: none;
 }
 .btn-primary:active,
+.btn-primary:focus,
 .btn-primary:hover{
   background-color: #999;
 }
