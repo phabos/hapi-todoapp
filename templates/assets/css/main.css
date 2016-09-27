@@ -232,6 +232,16 @@ a:hover {
   width: 100%;
   z-index: 10000;
 }
+.currentRead {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  white-space: nowrap;
+  width: 150px;
+  margin: 8px;
+  color: #fff;
+}
 #master {
   display: inline-block;
   width: 150px;
@@ -329,6 +339,21 @@ div.playlist.animated{
 }
 .playlist #message ul {
   text-align: left;
+}
+@media (max-width: 645px) {
+  .player {
+    height:150px;
+  }
+  .player .fright,
+  .player .fleft {
+    width:100%;
+    text-align: center;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .player .currentRead {
+    width: 100%;
+  }
 }
 @media (max-width: 545px) {
   .main {
