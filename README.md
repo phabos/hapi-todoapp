@@ -6,21 +6,21 @@ Aim of the project : build a media center on the top of nodejs for raspberry pi.
 ````npm install````
 
 ## Run
-Run with forever (you can also use pm2)
+Run with forever (you can also use pm2)    
 ````forever -v -d -w start app.js````
-Or
+Or    
 ````NODE_ENV=dev node app.js````
 
-Stop
+Stop    
 ````forever stopall````
 
-Start mongodb
+Start mongodb    
 ````mongod --config /usr/local/etc/mongod.conf````
 
-Set your env config in
+Set your env config in    
 ``env.json``
 
-Launch vlc api
+Launch vlc api    
 ````vlc -I http --http-password phabos````
-
+    
 Enjoy !
