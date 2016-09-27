@@ -6,7 +6,7 @@ Aim of the project : build a media center on the top of nodejs for raspberry pi.
 ````npm install````
 
 ## Run
-Run
+Run with forever (you can also use pm2)
 ````forever -v -d -w start app.js````
 Or
 ````NODE_ENV=dev node app.js````
@@ -20,5 +20,7 @@ Start mongodb
 Set your env config in
 ````env.json````
 
-Launch vlc api (unused for now)
-````/Applications/VLC.app/Contents/MacOS/VLC -I http --http-password phabos````
+Launch vlc api
+````vlc -I http --http-password phabos````
+
+Enjoy !
