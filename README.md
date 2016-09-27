@@ -7,9 +7,9 @@ Aim of the project : build a media center on the top of nodejs for raspberry pi.
 
 ## Run
 Run with forever (you can also use pm2)    
-````forever -v -d -w start app.js````
+````forever -v -d -w start app.js````    
 Or    
-````NODE_ENV=dev node app.js````
+````NODE_ENV=dev node app.js````    
 
 Stop    
 ````forever stopall````
