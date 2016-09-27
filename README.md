@@ -18,7 +18,7 @@ Start mongodb
 ````mongod --config /usr/local/etc/mongod.conf````
 
 Set your env config in
-````env.json````
+``env.json``
 
 Launch vlc api
 ````vlc -I http --http-password phabos````
