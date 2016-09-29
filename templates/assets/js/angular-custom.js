@@ -108,7 +108,7 @@ mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, getHtt
   $scope.currentRead = '';
 
   getCurrentState = function() {
-    setInterval( function() {
+    /*setInterval( function() {
       getHttp.httpRequest( mainDomain.name + '/vlc/state' ).success(function(data, status, headers, config) {
         if( data.state == 'playing' )
           $scope.currentState = 'fa-pause';
@@ -123,7 +123,7 @@ mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, getHtt
           $scope.currentRead = '';
         }
       });
-    }, 1000);
+    }, 1000);*/
 
     getHttp.httpRequest( mainDomain.name + '/vlc/state' ).success(function(data, status, headers, config) {
       if( data.state == 'playing' )
