@@ -219,7 +219,7 @@ mediaCenterApp.controller('ArtistDetailCtrl', function($scope, $http, getHttp, m
   }
 
   $scope.isAudioFile = function( filename ) {
-    return ['mp3', 'wav', 'flac', 'mp4', 'wma', 'opus', 'm4a'].indexOf( filename.split('.').pop() ) >= 0;
+    return ['mp3', 'wav', 'flac', 'mp4', 'wma', 'opus', 'm4a', 'ogg'].indexOf( filename.split('.').pop() ) >= 0;
   }
 
   $scope.addToList = function( file ) {
