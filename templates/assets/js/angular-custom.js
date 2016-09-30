@@ -104,45 +104,37 @@ mediaCenterApp.controller('YoutubeCtrl', function($scope, $http, getHttp, mainDo
 // Player
 mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, getHttp, mainDomain, animatePlaylist) {
 
-  $scope.currentState = 'fa-pause';
+  $scope.currentState = 'fa-play';
   $scope.currentRead = '';
+  $scope.currentVolume = 100;
 
   getCurrentState = function() {
-    /*setInterval( function() {
-      getHttp.httpRequest( mainDomain.name + '/vlc/state' ).success(function(data, status, headers, config) {
-        if( data.state == 'playing' )
-          $scope.currentState = 'fa-pause';
-        else
-          $scope.currentState = 'fa-play';
+    setInterval( function() {
+      console.log($scope.currentState);
+      if( $scope.currentState != 'fa-play' ) {
+        getHttp.httpRequest( mainDomain.name + '/vlc/state' ).success(function(data, status, headers, config) {
+          if( data.state == 'playing' )
+            $scope.currentState = 'fa-pause';
+          else
+            $scope.currentState = 'fa-play';
 
-        if( data.information ) {
-          var minutes = parseInt( data.time / 60 ) % 60;
-          var seconds = data.time % 60;
-          $scope.currentRead = (minutes < 10 ? "0" + minutes : minutes) + ':' + (seconds < 10 ? "0" + seconds : seconds) + ' - ' + data.information.category.meta.filename;
-        } else {
-          $scope.currentRead = '';
-        }
-      });
-    }, 1000);*/
-
+          if( data.information ) {
+            var minutes = parseInt( data.time / 60 ) % 60;
+            var seconds = data.time % 60;
+            $scope.currentRead = (minutes < 10 ? "0" + minutes : minutes) + ':' + (seconds < 10 ? "0" + seconds : seconds) + ' - ' + data.information.category.meta.filename;
+          } else {
+            $scope.currentRead = '';
+          }
+        });
+      }
+    }, 5000);
+    // First launch
     getHttp.httpRequest( mainDomain.name + '/vlc/state' ).success(function(data, status, headers, config) {
       if( data.state == 'playing' )
         $scope.currentState = 'fa-pause';
       else
         $scope.currentState = 'fa-play';
-
-      // Deal with jquery master volume
-      jQuery( "#master" ).slider({
-        value: data.volume,
-        orientation: "horizontal",
-        range: "min",
-        min: 0,
-        max: 200,
-        animate: true,
-        stop: function( event, ui ) {
-          getHttp.httpRequest( mainDomain.name + '/vlc/volume/' + ui.value ).success(function(data, status, headers, config) {});
-        }
-      });
+      $scope.currentVolume = parseInt( data.volume );
     });
   }
 
@@ -168,6 +160,23 @@ mediaCenterApp.controller('PlayerCtrl', function($scope, socketIoAngular, getHtt
       animatePlaylist.animate( 'Playlist trashed' );
     });
   }
+
+  $scope.more = function() {
+    var volume = $scope.currentVolume + 20;
+    if( volume <= 200 ) {
+      getHttp.httpRequest( mainDomain.name + '/vlc/volume/' + volume ).success(function(data, status, headers, config) {
+        $scope.currentVolume = volume;
+      });
+    }
+  }
+
+  $scope.less = function() {
+    var volume = $scope.currentVolume - 20;
+    if( volume >= 0 ) {
+      getHttp.httpRequest( mainDomain.name + '/vlc/volume/' + volume ).success(function(data, status, headers, config) {
+        $scope.currentVolume = volume;
+      });
+    }  }
 
   $scope.play = function() {
     getHttp.httpRequest( mainDomain.name + '/vlc/pause' ).success(function(data, status, headers, config) {

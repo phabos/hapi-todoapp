@@ -216,6 +216,7 @@ a:hover {
   color: #fff;
   border: none;
 }
+.btn-primary:visited,
 .btn-primary:active,
 .btn-primary:focus,
 .btn-primary:hover{
@@ -240,7 +241,7 @@ a:hover {
   font-size: 12px;
   white-space: nowrap;
   width: 150px;
-  margin: 8px;
+  margin: 5px;
   color: #fff;
 }
 #master {
@@ -322,7 +323,17 @@ div.playlist.animated{
   animation-name: up_and_down;
 	animation-duration: 7s;
 	animation-iteration-count: 1;
+  -webkit-animation-name: up_and_down;
+	-webkit-animation-duration: 7s;
+  -webkit-animation-iteration-count: 1;
 }
+@-webkit-keyframes up_and_down {
+	0% { top: -200px; }
+  20% { top: 100px; }
+	70% { top: 100px; }
+	100% { top: -200px; }
+}
+
 @keyframes up_and_down {
 	0% { top: -200px; }
   20% { top: 100px; }
@@ -343,7 +354,7 @@ div.playlist.animated{
 }
 @media (max-width: 645px) {
   .player {
-    height:150px;
+    height:160px;
   }
   .player .fright,
   .player .fleft {
@@ -351,6 +362,7 @@ div.playlist.animated{
     text-align: center;
     margin-left: 0px;
     margin-right: 0px;
+    margin-top: 5px;
   }
   .player .currentRead {
     width: 100%;
